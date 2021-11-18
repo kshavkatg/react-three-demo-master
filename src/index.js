@@ -69,11 +69,13 @@ class App extends Component {
         //
 
         window.addEventListener( 'resize', this.onWindowResize );
-
+        console.log(`controller: ${this.controller}`)
+        console.log(`scene: ${this.scene}`)
+        console.log(`renderer: ${this.renderer}`)
     }
 
     onWindowResize() {
-
+        console.log(`camera from resizer: ${this.camera}`)
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
 
