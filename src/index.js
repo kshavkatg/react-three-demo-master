@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import * as THREE from 'three';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
-import { XREstimatedLight } from 'three/examples/webxr/XREstimatedLight.js';
+import { XREstimatedLight } from '../lib/XREstimatedLight';
 
 function Container() {
     useEffect(() => {
