@@ -8,11 +8,14 @@ import { XREstimatedLight } from 'three/examples/jsm/webxr/XREstimatedLight';
 console.log(XREstimatedLight)
 
 function Container() {
+
+    // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
+        // define variables
         let camera, scene, renderer;
         let controller;
         let defaultEnvironment;
-
+        
         init();
         animate();
 
@@ -51,11 +54,8 @@ function Container() {
 
                 // The estimated lighting also provides an environment cubemap, which we can apply here.
                 if ( xrLight.environment ) {
-
                     updateEnvironment( xrLight.environment );
-
                 }
-
             } );
 
             xrLight.addEventListener( 'estimationend', () => {
@@ -73,23 +73,16 @@ function Container() {
 
             new RGBELoader()
                 .setDataType( THREE.UnsignedByteType )
-                .setPath( 'textures/equirectangular/' )
+                .setPath( '%PUBLIC_URL%/textures/' )
                 .load( 'royal_esplanade_1k.hdr', function ( texture ) {
 
                     texture.mapping = THREE.EquirectangularReflectionMapping;
-
                     defaultEnvironment = texture;
-
                     updateEnvironment( defaultEnvironment );
-
                 } );
-
-            //
 
             // In order for lighting estimation to work, 'light-estimation' must be included as either an optional or required feature.
             document.body.appendChild( ARButton.createButton( renderer, { optionalFeatures: [ 'light-estimation' ] } ) );
-
-            //
 
             const ballGeometry = new THREE.SphereBufferGeometry( 0.175, 32, 32 );
             const ballGroup = new THREE.Group();
@@ -101,72 +94,50 @@ function Container() {
             for ( let i = 0; i < rows; i ++ ) {
 
                 for ( let j = 0; j < cols; j ++ ) {
-
                     const ballMaterial = new THREE.MeshPhongMaterial( {
                         color: 0xdddddd,
                         reflectivity: j / cols
                     } );
+
                     const ballMesh = new THREE.Mesh( ballGeometry, ballMaterial );
                     ballMesh.position.set( ( i + 0.5 - rows * 0.5 ) * 0.4, ( j + 0.5 - cols * 0.5 ) * 0.4, 0 );
                     ballGroup.add( ballMesh );
-
                 }
-
             }
-
             scene.add( ballGroup );
 
-            //
-
             function onSelect() {
-
                 ballGroup.position.set( 0, 0, - 2 ).applyMatrix4( controller.matrixWorld );
                 ballGroup.quaternion.setFromRotationMatrix( controller.matrixWorld );
-
             }
 
             controller = renderer.xr.getController( 0 );
             controller.addEventListener( 'select', onSelect );
             scene.add( controller );
 
-            //
-
             window.addEventListener( 'resize', onWindowResize );
-
         }
 
         function onWindowResize() {
-
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
 
             renderer.setSize( window.innerWidth, window.innerHeight );
-
         }
 
-        //
-
         function animate() {
-
             renderer.setAnimationLoop( render );
-
         }
 
         function render() {
-
             renderer.render( scene, camera );
-
         }
 
+        // apply environment map
         function updateEnvironment( envMap ) {
-
             scene.traverse( function ( object ) {
-
                 if ( object.isMesh ) object.material.envMap = envMap;
-
-
             } );
-
         }
 
     }, [])
@@ -175,7 +146,7 @@ function Container() {
 
     return (
         <>
-            <div />
+            <div className="scene" />
         </>
     )
     
