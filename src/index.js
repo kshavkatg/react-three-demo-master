@@ -7,7 +7,7 @@ import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
 const style = {
     height: 500 // we can control scene size by setting container dimensions
 };
-console.log('boo')
+console.log('boomm')
 
 class App extends Component {
     componentDidMount() {
