@@ -5,7 +5,6 @@ import * as THREE from           'three';
 import { RGBELoader } from       'three/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
 import { XREstimatedLight } from 'three/examples/jsm/webxr/XREstimatedLight';
-console.log(XREstimatedLight)
 
 function Container() {
 
@@ -75,8 +74,7 @@ function Container() {
                 new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
                 new THREE.MeshBasicMaterial()
             );
-            console.log('reticle auto update')
-            reticle.matrixAutoUpdate = true;
+            reticle.matrixAutoUpdate = false;
             reticle.visible = false;
             scene.add( reticle );
 
