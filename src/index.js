@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
-import * as THREE from 'three';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
-//import { XREstimatedLight } from './XREstimatedLight';
+import * as THREE from           'three';
+import { RGBELoader } from       'three/examples/jsm/loaders/RGBELoader.js';
+import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
+import { XREstimatedLight } from 'three/examples/jsm/webxr/XREstimatedLight';
+console.log(XREstimatedLight)
 
 function Container() {
     useEffect(() => {
