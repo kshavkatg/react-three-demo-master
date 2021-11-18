@@ -1,114 +1,183 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+
 import * as THREE from 'three';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
+import { XREstimatedLight } from 'three/examples/jsm/webxr/XREstimatedLight.js';
 
-const style = {
-    height: 500 // we can control scene size by setting container dimensions
-};
-console.log('boomm')
+function Container() {
+    useEffect(() => {
+        let camera, scene, renderer;
+        let controller;
+        let defaultEnvironment;
 
-class App extends Component {
-    componentDidMount() {
-        this.init()
-        this.animate()
-        window.addEventListener('resize', this.handleWindowResize);
-    }
+        init();
+        animate();
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleWindowResize);
-        window.cancelAnimationFrame(this.requestID);
-    }
+        function init() {
 
-    // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
-    // https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
-    init() {
-        const container = document.createElement( 'div' );
-        document.body.appendChild( container );
+            const container = document.createElement( 'div' );
+            document.body.appendChild( container );
 
-        this.scene = new THREE.Scene();
+            scene = new THREE.Scene();
 
-        this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
+            camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
 
-        const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-        light.position.set( 0.5, 1, 0.25 );
-        this.scene.add( light );
-        //
+            const defaultLight = new THREE.AmbientLight( 0xffffff );
+            scene.add( defaultLight );
 
-        this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-        this.renderer.setPixelRatio( window.devicePixelRatio );
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
-        this.renderer.xr.enabled = true;
-        container.appendChild( this.renderer.domElement );
+            //
 
-        //
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.physicallyCorrectLights = true;
+            renderer.xr.enabled = true;
+            container.appendChild( renderer.domElement );
 
-        document.body.appendChild( ARButton.createButton( this.renderer ) );
+            // Don't add the XREstimatedLight to the scene initially.
+            // It doesn't have any estimated lighting values until an AR session starts.
 
-        //
+            const xrLight = new XREstimatedLight( renderer );
 
-        const geometry = new THREE.CylinderGeometry( 0, 0.05, 0.2, 32 ).rotateX( Math.PI / 2 );
+            xrLight.addEventListener( 'estimationstart', () => {
 
-        const onSelect = () => {
-            console.log('select')
-            const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-            const mesh = new THREE.Mesh( geometry, material );
-            mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( this.controller.matrixWorld );
-            mesh.quaternion.setFromRotationMatrix( this.controller.matrixWorld );
-            this.scene.add( mesh );
+                // Swap the default light out for the estimated one one we start getting some estimated values.
+                scene.add( xrLight );
+                scene.remove( defaultLight );
+
+                // The estimated lighting also provides an environment cubemap, which we can apply here.
+                if ( xrLight.environment ) {
+
+                    updateEnvironment( xrLight.environment );
+
+                }
+
+            } );
+
+            xrLight.addEventListener( 'estimationend', () => {
+
+                // Swap the lights back when we stop receiving estimated values.
+                scene.add( defaultLight );
+                scene.remove( xrLight );
+
+                // Revert back to the default environment.
+                updateEnvironment( defaultEnvironment );
+
+            } );
+
+            //
+
+            new RGBELoader()
+                .setDataType( THREE.UnsignedByteType )
+                .setPath( 'textures/equirectangular/' )
+                .load( 'royal_esplanade_1k.hdr', function ( texture ) {
+
+                    texture.mapping = THREE.EquirectangularReflectionMapping;
+
+                    defaultEnvironment = texture;
+
+                    updateEnvironment( defaultEnvironment );
+
+                } );
+
+            //
+
+            // In order for lighting estimation to work, 'light-estimation' must be included as either an optional or required feature.
+            document.body.appendChild( ARButton.createButton( renderer, { optionalFeatures: [ 'light-estimation' ] } ) );
+
+            //
+
+            const ballGeometry = new THREE.SphereBufferGeometry( 0.175, 32, 32 );
+            const ballGroup = new THREE.Group();
+            ballGroup.position.z = - 2;
+
+            const rows = 1;
+            const cols = 4;
+
+            for ( let i = 0; i < rows; i ++ ) {
+
+                for ( let j = 0; j < cols; j ++ ) {
+
+                    const ballMaterial = new THREE.MeshPhongMaterial( {
+                        color: 0xdddddd,
+                        reflectivity: j / cols
+                    } );
+                    const ballMesh = new THREE.Mesh( ballGeometry, ballMaterial );
+                    ballMesh.position.set( ( i + 0.5 - rows * 0.5 ) * 0.4, ( j + 0.5 - cols * 0.5 ) * 0.4, 0 );
+                    ballGroup.add( ballMesh );
+
+                }
+
+            }
+
+            scene.add( ballGroup );
+
+            //
+
+            function onSelect() {
+
+                ballGroup.position.set( 0, 0, - 2 ).applyMatrix4( controller.matrixWorld );
+                ballGroup.quaternion.setFromRotationMatrix( controller.matrixWorld );
+
+            }
+
+            controller = renderer.xr.getController( 0 );
+            controller.addEventListener( 'select', onSelect );
+            scene.add( controller );
+
+            //
+
+            window.addEventListener( 'resize', onWindowResize );
 
         }
 
-        this.controller = this.renderer.xr.getController( 0 );
-        this.controller.addEventListener( 'select', onSelect );
-        this.scene.add( this.controller );
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
 
         //
 
-        window.addEventListener( 'resize', this.onWindowResize );
-        console.log(`controller: ${this.controller}`)
-        console.log(`scene: ${this.scene}`)
-        console.log(`renderer: ${this.renderer}`)
-    }
+        function animate() {
 
-    onWindowResize() {
-        console.log(`camera from resizer: ${this.camera}`)
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
+            renderer.setAnimationLoop( render );
 
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
-    }
-    //
+        }
 
-    animate() {
-        this.renderer.setAnimationLoop( this.render );
-    }
+        function render() {
 
-    render() {
-        this.renderer.render( this.scene, this.camera );
-    }
+            renderer.render( scene, camera );
 
-    render() {
-        return <div style={style} ref={ref => (this.mount = ref)} />;
-    }
-}
+        }
 
-class Container extends React.Component {
-    state = {isMounted: true};
+        function updateEnvironment( envMap ) {
 
-    render() {
-        const {isMounted = true} = this.state;
-        return (
-            <>
-                <button onClick={() => this.setState(state => ({isMounted: !state.isMounted}))}>
-                    {isMounted ? "Unmount" : "Mount"}
-                </button>
-                {isMounted && <App />}
-                {isMounted && <div>Scroll to zoom, drag to rotate</div>}
-            </>
-        )
-    }
+            scene.traverse( function ( object ) {
+
+                if ( object.isMesh ) object.material.envMap = envMap;
+
+
+            } );
+
+        }
+
+    }, [])
+
+
+
+    return (
+        <>
+            <div />
+        </>
+    )
+    
 }
 
 const rootElement = document.getElementById("root");
