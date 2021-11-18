@@ -75,6 +75,7 @@ function Container() {
                 new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
                 new THREE.MeshBasicMaterial()
             );
+            console.log('reticle auto update')
             reticle.matrixAutoUpdate = true;
             reticle.visible = false;
             scene.add( reticle );
