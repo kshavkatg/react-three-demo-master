@@ -13,13 +13,13 @@
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",
-    "three": "latest",
-    "predeploy": "npm build",
-    "deploy": "gh-pages -d build"
+    "three": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
