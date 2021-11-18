@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import * as THREE from 'three';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
-import { XREstimatedLight } from './XREstimatedLight';
+//import { XREstimatedLight } from './XREstimatedLight';
 
 function Container() {
     useEffect(() => {
@@ -40,7 +40,7 @@ function Container() {
             // Don't add the XREstimatedLight to the scene initially.
             // It doesn't have any estimated lighting values until an AR session starts.
 
-            const xrLight = new XREstimatedLight( renderer );
+            //const xrLight = new XREstimatedLight( renderer );
 
             xrLight.addEventListener( 'estimationstart', () => {
 
