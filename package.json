@@ -2,6 +2,7 @@
   "name": "react-three-demo",
   "version": "1.0.0",
   "description": "Basic React wrapper for Three.js",
+  "homepage": "https://kshavkatg.github.io/react-three-demo-master/",
   "keywords": [
     "react",
     "three"
@@ -12,7 +13,9 @@
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",
-    "three": "latest"
+    "three": "latest",
+    "predeploy": "npm build",
+    "deploy": "gh-pages -d build"
   },
   "scripts": {
     "start": "react-scripts start",
