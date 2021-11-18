@@ -24,7 +24,6 @@ class App extends Component {
     // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
     // https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
     init() {
-
         const container = document.createElement( 'div' );
         document.body.appendChild( container );
 
@@ -35,7 +34,6 @@ class App extends Component {
         const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
         light.position.set( 0.5, 1, 0.25 );
         this.scene.add( light );
-
         //
 
         this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
@@ -80,25 +78,15 @@ class App extends Component {
         this.camera.updateProjectionMatrix();
 
         this.renderer.setSize( window.innerWidth, window.innerHeight );
-
     }
-
     //
 
     animate() {
-
         this.renderer.setAnimationLoop( this.render );
-
     }
 
     render() {
-
         this.renderer.render( this.scene, this.camera );
-
-    }
-
-    render() {
-        return <div style={style} ref={ref => (this.mount = ref)} />;
     }
 }
 
