@@ -53,7 +53,7 @@ class App extends Component {
         const geometry = new THREE.CylinderGeometry( 0, 0.05, 0.2, 32 ).rotateX( Math.PI / 2 );
 
         const onSelect = () => {
-
+            console.log('select')
             const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
             const mesh = new THREE.Mesh( geometry, material );
             mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( this.controller.matrixWorld );
