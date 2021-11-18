@@ -82,15 +82,15 @@ class App extends Component {
     //
 
     animate() {
-        this.renderer.setAnimationLoop( this.renderIt );
+        this.renderer.setAnimationLoop( this.renderIT );
     }
 
-    renderIt() {
+    renderIT() {
         this.renderer.render( this.scene, this.camera );
     }
 
     render() {
-        return <div />;
+        return <div style={style} ref={ref => (this.mount = ref)} />;
     }
 }
 
