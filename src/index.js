@@ -42,31 +42,31 @@ function Container() {
 
             //const xrLight = new XREstimatedLight( renderer );
 
-            xrLight.addEventListener( 'estimationstart', () => {
+            // xrLight.addEventListener( 'estimationstart', () => {
 
-                // Swap the default light out for the estimated one one we start getting some estimated values.
-                scene.add( xrLight );
-                scene.remove( defaultLight );
+            //     // Swap the default light out for the estimated one one we start getting some estimated values.
+            //     scene.add( xrLight );
+            //     scene.remove( defaultLight );
 
-                // The estimated lighting also provides an environment cubemap, which we can apply here.
-                if ( xrLight.environment ) {
+            //     // The estimated lighting also provides an environment cubemap, which we can apply here.
+            //     if ( xrLight.environment ) {
 
-                    updateEnvironment( xrLight.environment );
+            //         updateEnvironment( xrLight.environment );
 
-                }
+            //     }
 
-            } );
+            // } );
 
-            xrLight.addEventListener( 'estimationend', () => {
+            // xrLight.addEventListener( 'estimationend', () => {
 
-                // Swap the lights back when we stop receiving estimated values.
-                scene.add( defaultLight );
-                scene.remove( xrLight );
+            //     // Swap the lights back when we stop receiving estimated values.
+            //     scene.add( defaultLight );
+            //     scene.remove( xrLight );
 
-                // Revert back to the default environment.
-                updateEnvironment( defaultEnvironment );
+            //     // Revert back to the default environment.
+            //     updateEnvironment( defaultEnvironment );
 
-            } );
+            // } );
 
             //
 
