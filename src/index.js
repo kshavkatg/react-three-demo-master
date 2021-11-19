@@ -61,18 +61,16 @@ function Container() {
 
             mouse = new THREE.Vector2()
 
-            function onTouch( event ) {
+            const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
 	            // (-1 to +1) for both components
 
 	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                console.log(mouse.x, mouse.y)
             }
 
-            document.body.addEventListener('click', (e) => {
-                console.log('click')
-                console.log(e.clientX, e.clientY)
-            })
+            document.body.addEventListener('click', onTouch)
 
 
 
