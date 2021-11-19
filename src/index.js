@@ -67,9 +67,13 @@ function Container() {
                     
                     const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
                     const mesh = new THREE.Mesh( geometry, material );
-                    mesh.position.setFromMatrixPosition( reticle.matrix );
-                    mesh.scale.y = Math.random() * 2 + 1;
+                    // mesh.position.setFromMatrixPosition( reticle.matrix );
+                    // mesh.scale.y = Math.random() * 2 + 1;
+
+                    mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
+					mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
                     scene.add( mesh );
+                    
                     console.log('reticleMatrix', reticle.matrix)
                     console.log('mesh.position', mesh.position)
                 }
