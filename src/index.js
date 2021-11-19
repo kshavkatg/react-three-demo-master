@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import * as THREE from           'three';
 import { RGBELoader } from       'three/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
-import { XREstimatedLight } from 'three/examples/jsm/webxr/XREstimatedLight';
+import { ControllerGestures } from './libs/ControllerGestures'
 
 function Container() {
 
@@ -53,7 +53,7 @@ function Container() {
             renderer.xr.enabled = true;
             container.appendChild( renderer.domElement );
 
-
+            const gestures = new ControllerGestures(renderer)
 
             // cast a ray
             raycaster = new THREE.Raycaster()
@@ -68,13 +68,14 @@ function Container() {
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
 	            // (-1 to +1) for both components
-
+                console.log('tap')
 	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
                 console.log(mouse.x, mouse.y)
             }
 
             document.body.addEventListener('click', onTouch)
+            gestures.addEventListener('tap', onTouch)
 
             // TEST ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
