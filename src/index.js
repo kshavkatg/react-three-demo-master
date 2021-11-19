@@ -17,6 +17,7 @@ function Container() {
         let controller;
         let reticle;
         let raycaster;
+        let mouse;
 
         // set hit test
         let hitTestSource = null;
@@ -48,18 +49,32 @@ function Container() {
             renderer.xr.enabled = true;
             container.appendChild( renderer.domElement );
 
+
+
             // cast a ray
             raycaster = new THREE.Raycaster()
             console.log('camera.position', camera.position)
             const rayOrigin = camera.position
-            const rayDirection = new THREE.Vector3(0, 0, -10)
-            rayDirection.normalize()
-            raycaster.set(rayOrigin, rayDirection)
+            // const rayDirection = new THREE.Vector3(0, 0, -10)
+            // rayDirection.normalize()
+            // raycaster.set(rayOrigin, rayDirection)
+
+            mouse = new THREE.Vector2()
+
+            function onTouch( event ) {
+                // calculate mouse position in normalized device coordinates
+	            // (-1 to +1) for both components
+
+	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+            }
 
             document.body.addEventListener('click', (e) => {
                 console.log('click')
                 console.log(e.clientX, e.clientY)
             })
+
+
 
             // TEST ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({
@@ -130,6 +145,14 @@ function Container() {
 
                 // get session object
                 const session = renderer.xr.getSession();
+
+                raycaster.setFromCamera( mouse, camera )
+                const intersects = raycaster.intersectObjects( scene.children, false );
+
+                for(const intersect of intersects)
+                {
+                    intersect.object.material.color.set('#0000ff')
+                }
  
                 if ( hitTestSourceRequested === false ) {
                     // get the Viewer ref space
