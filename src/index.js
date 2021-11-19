@@ -90,22 +90,15 @@ function Container() {
 
             // on user select add cylinder to the reticle position
             function onSelect() {
+                const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+                const mesh = new THREE.Mesh( geometry, material );
+
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 console.log(intersects)
-
-                for(const intersect of intersects)
-                {
-                    intersect.object.material.color.set('#0000ff')
-                }
-
-                    
-                // const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-                // const mesh = new THREE.Mesh( geometry, material );
-                // mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
-				// mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
-                // scene.add( mesh );
                 
+                mesh.position.set(intersects[0].point)
+                scene.add( mesh );
             }
 
             // get Controller (touch screen)
