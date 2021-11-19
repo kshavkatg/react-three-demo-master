@@ -75,7 +75,7 @@ function Container() {
 
 
             // TEST ground planeMesh
-            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({
+            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
             }))
             planeMesh.rotation.x = Math.PI / 2
@@ -90,17 +90,21 @@ function Container() {
 
             // on user select add cylinder to the reticle position
             function onSelect() {
+                raycaster.setFromCamera( mouse, camera )
+                const intersects = raycaster.intersectObjects( scene.children, false );
+                console.log(intersects)
+
+                for(const intersect of intersects)
+                {
+                    intersect.object.material.color.set('#0000ff')
+                }
+
                     
-                const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-                const mesh = new THREE.Mesh( geometry, material );
-                // mesh.position.setFromMatrixPosition( reticle.matrix );
-                // mesh.scale.y = Math.random() * 2 + 1;
-                mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
-				mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
-                scene.add( mesh );
-                
-                console.log('reticleMatrix', reticle.matrix)
-                console.log('mesh.position', mesh.position)
+                // const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+                // const mesh = new THREE.Mesh( geometry, material );
+                // mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
+				// mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
+                // scene.add( mesh );
                 
             }
 
@@ -143,14 +147,6 @@ function Container() {
 
                 // get session object
                 const session = renderer.xr.getSession();
-
-                raycaster.setFromCamera( mouse, camera )
-                const intersects = raycaster.intersectObjects( scene.children, false );
-
-                for(const intersect of intersects)
-                {
-                    intersect.object.material.color.set('#0000ff')
-                }
  
                 if ( hitTestSourceRequested === false ) {
                     // get the Viewer ref space
