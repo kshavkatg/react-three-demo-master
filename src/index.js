@@ -81,8 +81,7 @@ function Container() {
             // TEST ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
-                transparent: true,
-                map: silhouette,
+                color: 0x808080,
             }))
             planeMesh.rotation.x = Math.PI / 2
             planeMesh.position.set(0, -1, -2)
@@ -92,11 +91,15 @@ function Container() {
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
             // cylinder
-            const geometry = new THREE.PlaneBufferGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
+            const geometry = new THREE.PlaneBufferGeometry(3, 8.5, 1)
 
 // on user select add cylinder to the reticle position
             function onSelect() {
-                const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+                const material = new THREE.MeshPhongMaterial( {
+                    color: 0xffffff * Math.random(),
+                    side: THREE.DoubleSide,
+                    map: silhouette,
+                } );
                 const mesh = new THREE.Mesh( geometry, material );
 
                 raycaster.setFromCamera( mouse, camera )
