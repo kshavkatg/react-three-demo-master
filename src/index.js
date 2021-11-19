@@ -92,7 +92,7 @@ function Container() {
 
             // cylinder
             const geometry = new THREE.PlaneBufferGeometry(3, 8.5, 1)
-            const material = new THREE.MeshPhongMaterial( {
+            const material = new THREE.MeshBasicMaterial( {
                 transparent: true,
                 side: THREE.DoubleSide,
                 map: silhouette,
