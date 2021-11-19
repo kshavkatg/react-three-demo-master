@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/react-three-demo-master/static/js/main.30d890c2.chunk.js",
-    "main.js.map": "/react-three-demo-master/static/js/main.30d890c2.chunk.js.map",
+    "main.js": "/react-three-demo-master/static/js/main.179053f1.chunk.js",
+    "main.js.map": "/react-three-demo-master/static/js/main.179053f1.chunk.js.map",
     "runtime-main.js": "/react-three-demo-master/static/js/runtime-main.e7240b8e.js",
     "runtime-main.js.map": "/react-three-demo-master/static/js/runtime-main.e7240b8e.js.map",
     "static/js/2.ac2867aa.chunk.js": "/react-three-demo-master/static/js/2.ac2867aa.chunk.js",
     "static/js/2.ac2867aa.chunk.js.map": "/react-three-demo-master/static/js/2.ac2867aa.chunk.js.map",
     "index.html": "/react-three-demo-master/index.html",
-    "precache-manifest.f98c8ec23873618a9443f97057f7006c.js": "/react-three-demo-master/precache-manifest.f98c8ec23873618a9443f97057f7006c.js",
+    "precache-manifest.7d83163cc5b952495ffade7ae44e43a5.js": "/react-three-demo-master/precache-manifest.7d83163cc5b952495ffade7ae44e43a5.js",
     "service-worker.js": "/react-three-demo-master/service-worker.js",
     "static/js/2.ac2867aa.chunk.js.LICENSE.txt": "/react-three-demo-master/static/js/2.ac2867aa.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e7240b8e.js",
     "static/js/2.ac2867aa.chunk.js",
-    "static/js/main.30d890c2.chunk.js"
+    "static/js/main.179053f1.chunk.js"
   ]
 }
