@@ -76,8 +76,6 @@ function Container() {
 
             document.body.addEventListener('click', onTouch)
 
-
-
             // TEST ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
@@ -92,7 +90,7 @@ function Container() {
 
             // cylinder
             const geometry = new THREE.PlaneBufferGeometry(3, 8.5, 1)
-            const material = new THREE.MeshBasicMaterial( {
+            const material = new THREE.MeshStandardMaterial( {
                 transparent: true,
                 side: THREE.DoubleSide,
                 map: silhouette,
