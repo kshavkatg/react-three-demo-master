@@ -33,6 +33,10 @@ function Container() {
             // set Scene
             scene = new THREE.Scene();
 
+            // load Textures
+            const textureLoader = new THREE.TextureLoader()
+            const silhouette = textureLoader.load('%PUBLIC_URL%/textures/silhouette.png')
+
             // set Camera
             camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
 
@@ -77,6 +81,8 @@ function Container() {
             // TEST ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
+                transparent: true,
+                map: silhouette,
             }))
             planeMesh.rotation.x = Math.PI / 2
             planeMesh.position.set(0, -1, -2)
@@ -86,9 +92,9 @@ function Container() {
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
             // cylinder
-            const geometry = new THREE.CylinderGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
+            const geometry = new THREE.PlaneBufferGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
 
-            // on user select add cylinder to the reticle position
+// on user select add cylinder to the reticle position
             function onSelect() {
                 const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
                 const mesh = new THREE.Mesh( geometry, material );
@@ -176,25 +182,18 @@ function Container() {
                     } else {
                         reticle.visible = false;
                     }
-
                 }
-
             }
-
             renderer.render( scene, camera );
-
         }
 
     }, [])
-
-
 
     return (
         <>
             <div className="scene" />
         </>
     )
-    
 }
 
 const rootElement = document.getElementById("root");
