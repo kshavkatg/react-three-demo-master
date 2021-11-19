@@ -77,19 +77,19 @@ function Container() {
             document.body.addEventListener('click', onTouch)
 
             // TEST ground planeMesh
-            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), new THREE.MeshStandardMaterial({
+            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
-                color: 0x808080,
+                transparent: true,
             }))
             planeMesh.rotation.x = Math.PI / 2
-            planeMesh.position.set(0, -1, -2)
+            planeMesh.position.set(0, -1.4, -2)
             scene.add(planeMesh)
 
             // add AR button and require hit-test
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
             // cylinder
-            const geometry = new THREE.PlaneBufferGeometry(3, 8.5, 1)
+            const geometry = new THREE.PlaneBufferGeometry(0.7, 2, 1)
             const material = new THREE.MeshStandardMaterial( {
                 transparent: true,
                 side: THREE.DoubleSide,
@@ -99,15 +99,17 @@ function Container() {
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
 
-// on user select add cylinder to the reticle position
+            // on user select add cylinder to the reticle position
             function onSelect() {
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 const intPoint = intersects[0].point
                 console.log(intPoint)
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 4.25, intPoint.z)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
                     silhouetteMesh.visible = true
+                } else if (silhouetteMesh.visible) {
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
                 }
             }
 
