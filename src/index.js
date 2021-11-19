@@ -96,7 +96,6 @@ function Container() {
 // on user select add cylinder to the reticle position
             function onSelect() {
                 const material = new THREE.MeshPhongMaterial( {
-                    color: 0xffffff * Math.random(),
                     side: THREE.DoubleSide,
                     map: silhouette,
                 } );
