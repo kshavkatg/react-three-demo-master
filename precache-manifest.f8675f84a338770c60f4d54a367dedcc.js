@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b71e9ca7102033deb66b2849d2eb6621",
+    "revision": "ffab8cf3f097d6d62c561bd9fc2ac426",
     "url": "/react-three-demo-master/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-three-demo-master/static/js/2.ea6e1f92.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6b956372463bb8246f25",
-    "url": "/react-three-demo-master/static/js/main.5f8a6606.chunk.js"
+    "revision": "53a30d52cef02c5ef7a7",
+    "url": "/react-three-demo-master/static/js/main.6f217354.chunk.js"
   },
   {
     "revision": "4a2eb19f066d33a520a5",
