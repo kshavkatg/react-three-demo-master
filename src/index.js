@@ -95,9 +95,10 @@ function Container() {
 
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
-                console.log(intersects)
+                const intPoint = intersects[0].point
+                console.log(intPoint)
                 
-                mesh.position.set(intersects[0].point)
+                mesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                 scene.add( mesh );
             }
 
