@@ -35,7 +35,7 @@ function Container() {
 
             // load Textures
             const textureLoader = new THREE.TextureLoader()
-            const silhouette = textureLoader.load('%PUBLIC_URL%/textures/silhouette.png')
+            const silhouette = textureLoader.load('./textures/silhouette.png')
 
             // set Camera
             camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
