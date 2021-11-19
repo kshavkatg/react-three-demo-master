@@ -114,13 +114,13 @@ function Container() {
             scene.add( controller );
 
             // create Reticle
-            reticle = new THREE.Mesh(
-                new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
-                new THREE.MeshBasicMaterial()
-            );
-            reticle.matrixAutoUpdate = false;
-            reticle.visible = false;
-            scene.add( reticle );
+            // reticle = new THREE.Mesh(
+            //     new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
+            //     new THREE.MeshBasicMaterial()
+            // );
+            // reticle.matrixAutoUpdate = false;
+            // reticle.visible = false;
+            // scene.add( reticle );
             
             // set resize handler
             window.addEventListener( 'resize', onWindowResize );
@@ -176,11 +176,11 @@ function Container() {
                         // get first result
                         const hit = hitTestResults[ 0 ];
                         // show and place reticle
-                        reticle.visible = true;
-                        reticle.matrix.fromArray( hit.getPose( referenceSpace ).transform.matrix );
+                        // reticle.visible = true;
+                        // reticle.matrix.fromArray( hit.getPose( referenceSpace ).transform.matrix );
 
                     } else {
-                        reticle.visible = false;
+                        // reticle.visible = false;
                     }
                 }
             }
