@@ -92,22 +92,25 @@ function Container() {
 
             // cylinder
             const geometry = new THREE.PlaneBufferGeometry(3, 8.5, 1)
+            const material = new THREE.MeshPhongMaterial( {
+                flatShading: true,
+                side: THREE.DoubleSide,
+                map: silhouette,
+            } );
+            const silhouetteMesh = new THREE.Mesh( geometry, material );
+            scene.add( silhouetteMesh );
+            silhouetteMesh.visible = false
 
 // on user select add cylinder to the reticle position
             function onSelect() {
-                const material = new THREE.MeshPhongMaterial( {
-                    side: THREE.DoubleSide,
-                    map: silhouette,
-                } );
-                const mesh = new THREE.Mesh( geometry, material );
-
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 const intPoint = intersects[0].point
                 console.log(intPoint)
-                
-                mesh.position.set(intPoint.x, intPoint.y, intPoint.z)
-                scene.add( mesh );
+                if (!silhouetteMesh.visible) {
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 4.25, intPoint.z)
+                    silhouetteMesh.visible = true
+                }
             }
 
             // get Controller (touch screen)
