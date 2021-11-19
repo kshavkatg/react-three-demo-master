@@ -44,6 +44,10 @@ function Container() {
             renderer.xr.enabled = true;
             container.appendChild( renderer.domElement );
 
+            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), THREE.MeshStandardMaterial())
+            
+            scene.add(planeMesh)
+
             //
 
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
