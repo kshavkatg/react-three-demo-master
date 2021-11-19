@@ -64,11 +64,14 @@ function Container() {
             // on user select add cylinder to the reticle position
             function onSelect() {
                 if ( reticle.visible ) {
+                    
                     const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
                     const mesh = new THREE.Mesh( geometry, material );
                     mesh.position.setFromMatrixPosition( reticle.matrix );
                     mesh.scale.y = Math.random() * 2 + 1;
                     scene.add( mesh );
+                    console.log('reticleMatrix', reticle.matrix)
+                    console.log('mesh.position', mesh.position)
                 }
             }
 
@@ -106,14 +109,12 @@ function Container() {
         // Render
         function render( timestamp, frame ) {
             if ( frame ) {
-                console.log('timestamp', timestamp)
                 // get reference space of device
                 const referenceSpace = renderer.xr.getReferenceSpace();
-                console.log('referenceSpace', referenceSpace)
+
                 // get session object
                 const session = renderer.xr.getSession();
-                console.log('session', session)
-
+ 
                 if ( hitTestSourceRequested === false ) {
                     // get the Viewer ref space
                     session.requestReferenceSpace( 'viewer' ).then( function ( referenceSpace ) {
@@ -134,11 +135,9 @@ function Container() {
                 }
 
                 if ( hitTestSource ) {
-                    console.log('frame', frame)
-                    console.log('hitTestSource', hitTestSource)
+
                     // get hit test results
                     const hitTestResults = frame.getHitTestResults( hitTestSource );
-                    console.log('hitTestResults', hitTestResults)
 
                     if ( hitTestResults.length ) {
                         // get first result
