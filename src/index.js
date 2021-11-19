@@ -80,6 +80,7 @@ function Container() {
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
                 transparent: true,
+                opacity: 0,
             }))
             planeMesh.rotation.x = Math.PI / 2
             planeMesh.position.set(0, -1.4, -2)
