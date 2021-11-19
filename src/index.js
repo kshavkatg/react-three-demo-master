@@ -16,6 +16,7 @@ function Container() {
         let camera, scene, renderer;
         let controller;
         let reticle;
+        let raycaster;
 
         // set hit test
         let hitTestSource = null;
@@ -47,6 +48,19 @@ function Container() {
             renderer.xr.enabled = true;
             container.appendChild( renderer.domElement );
 
+            // cast a ray
+            raycaster = new THREE.Raycaster()
+            console.log('camera.position', camera.position)
+            const rayOrigin = camera.position
+            const rayDirection = new THREE.Vector3(0, 0, -10)
+            rayDirection.normalize()
+            raycaster.set(rayOrigin, rayDirection)
+
+            document.body.addEventListener('click', (e) => {
+                console.log('click')
+                console.log(e.clientX, e.clientY)
+            })
+
             // TEST ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
@@ -63,20 +77,18 @@ function Container() {
 
             // on user select add cylinder to the reticle position
             function onSelect() {
-                if ( reticle.visible ) {
                     
-                    const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-                    const mesh = new THREE.Mesh( geometry, material );
-                    // mesh.position.setFromMatrixPosition( reticle.matrix );
-                    // mesh.scale.y = Math.random() * 2 + 1;
-
-                    mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
-					mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
-                    scene.add( mesh );
-                    
-                    console.log('reticleMatrix', reticle.matrix)
-                    console.log('mesh.position', mesh.position)
-                }
+                const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+                const mesh = new THREE.Mesh( geometry, material );
+                // mesh.position.setFromMatrixPosition( reticle.matrix );
+                // mesh.scale.y = Math.random() * 2 + 1;
+                mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
+				mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
+                scene.add( mesh );
+                
+                console.log('reticleMatrix', reticle.matrix)
+                console.log('mesh.position', mesh.position)
+                
             }
 
             // get Controller (touch screen)
