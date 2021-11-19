@@ -45,7 +45,8 @@ function Container() {
             container.appendChild( renderer.domElement );
 
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(10, 10, 1, 1), new THREE.MeshStandardMaterial())
-
+            planeMesh.rotation.x = Math.PI() / 2
+            planeMesh.position.set(0, -1, -2)
             scene.add(planeMesh)
 
             //
