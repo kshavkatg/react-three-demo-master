@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import * as THREE from           'three';
-import { RGBELoader } from       'three/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 
@@ -10,18 +9,13 @@ function Container() {
 
     // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
-
         // define variables
         let container;
         let camera, scene, renderer;
         let controller;
-        let reticle;
         let raycaster;
         let mouse;
 
-        // set hit test
-        let hitTestSource = null;
-        let hitTestSourceRequested = false;
 
         init();
         animate();
@@ -53,15 +47,13 @@ function Container() {
             renderer.xr.enabled = true;
             container.appendChild( renderer.domElement );
 
+            // get gestures for multi-touch events
             const gestures = new ControllerGestures(renderer)
 
             // cast a ray
             raycaster = new THREE.Raycaster()
             console.log('camera.position', camera.position)
             const rayOrigin = camera.position
-            // const rayDirection = new THREE.Vector3(0, 0, -10)
-            // rayDirection.normalize()
-            // raycaster.set(rayOrigin, rayDirection)
 
             mouse = new THREE.Vector2()
 
@@ -74,7 +66,6 @@ function Container() {
                 console.log(mouse.x, mouse.y)
             }
 
-            document.body.addEventListener('click', onTouch)
             gestures.addEventListener('tap', onTouch)
 
             // TEST ground planeMesh
@@ -90,7 +81,7 @@ function Container() {
             // add AR button and require hit-test
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
-            // cylinder
+            // Silhouette
             const geometry = new THREE.PlaneBufferGeometry(0.7, 2, 1)
             const material = new THREE.MeshStandardMaterial( {
                 transparent: true,
@@ -103,10 +94,13 @@ function Container() {
 
             // on user select add cylinder to the reticle position
             function onSelect() {
+                // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
+                // get first intersection point
                 const intPoint = intersects[0].point
                 console.log(intPoint)
+                // show and replace silhouette
                 if (!silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
                     silhouetteMesh.visible = true
@@ -119,15 +113,6 @@ function Container() {
             controller = renderer.xr.getController( 0 );
             controller.addEventListener( 'select', onSelect );
             scene.add( controller );
-
-            // create Reticle
-            // reticle = new THREE.Mesh(
-            //     new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
-            //     new THREE.MeshBasicMaterial()
-            // );
-            // reticle.matrixAutoUpdate = false;
-            // reticle.visible = false;
-            // scene.add( reticle );
             
             // set resize handler
             window.addEventListener( 'resize', onWindowResize );
@@ -146,51 +131,9 @@ function Container() {
             renderer.setAnimationLoop( render );
         }
 
-        // Render
+        // Render function from for frame depending funct
         function render( timestamp, frame ) {
-            if ( frame ) {
-                // get reference space of device
-                const referenceSpace = renderer.xr.getReferenceSpace();
 
-                // get session object
-                const session = renderer.xr.getSession();
- 
-                if ( hitTestSourceRequested === false ) {
-                    // get the Viewer ref space
-                    session.requestReferenceSpace( 'viewer' ).then( function ( referenceSpace ) {
-                        // then use it to get hitTestSource
-                        session.requestHitTestSource( { space: referenceSpace } ).then( function ( source ) {
-                            hitTestSource = source;
-                        } );
-
-                    } );
-
-                    // on Session end remove hit test
-                    session.addEventListener( 'end', function () {
-                        hitTestSourceRequested = false;
-                        hitTestSource = null;
-                    } );
-
-                    hitTestSourceRequested = true;
-                }
-
-                if ( hitTestSource ) {
-
-                    // get hit test results
-                    const hitTestResults = frame.getHitTestResults( hitTestSource );
-
-                    if ( hitTestResults.length ) {
-                        // get first result
-                        const hit = hitTestResults[ 0 ];
-                        // show and place reticle
-                        // reticle.visible = true;
-                        // reticle.matrix.fromArray( hit.getPose( referenceSpace ).transform.matrix );
-
-                    } else {
-                        // reticle.visible = false;
-                    }
-                }
-            }
             renderer.render( scene, camera );
         }
 
