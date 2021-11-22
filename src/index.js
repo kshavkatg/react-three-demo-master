@@ -75,6 +75,7 @@ function Container() {
                 transparent: true,
                 opacity: 0,
             }))
+            planeMesh.name = 'ground'
             planeMesh.rotation.x = Math.PI / 2
             planeMesh.position.set(0, -0.5, 0)
             scene.add(planeMesh)
@@ -99,8 +100,14 @@ function Container() {
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 // get first intersection point
-                const intPoint = intersects[0].point
+                let intPoint
+                for (let intersect in intersects) {
+                    if (intersect.name === 'ground') {
+                        intPoint = intersect.point
+                    }
+                }
                 console.log(intersects[0])
+                console.log(intPoint)
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
