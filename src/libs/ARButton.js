@@ -148,6 +148,7 @@ class ARButton {
 			element.style.width = '75%'
 			element.style.height = '90px'
 			element.style.zIndex = '999';
+			element.style.background = 'black';
         	element.style.backgroundImage = 'url("./images/start_button.png")'
 			element.style.backgroundSize = 'cover'
 		}
