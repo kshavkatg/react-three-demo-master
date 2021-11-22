@@ -103,10 +103,10 @@ function Container() {
                 console.log(intPoint)
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3)
                     silhouetteMesh.visible = true
                 } else if (silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3
                 }
             }
 
