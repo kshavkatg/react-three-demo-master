@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+require('./styles/custom.scss')
 
 import * as THREE from           'three';
 import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
+import StartView from "./components/StartView";
 import { ControllerGestures } from './libs/ControllerGestures'
 
 function Container() {
@@ -141,6 +143,7 @@ function Container() {
 
     return (
         <>
+            <StartView />
             <div className="scene" />
         </>
     )
