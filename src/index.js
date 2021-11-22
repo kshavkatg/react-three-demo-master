@@ -53,7 +53,6 @@ function Container() {
 
             // cast a ray
             raycaster = new THREE.Raycaster()
-            console.log('camera.position', camera.position)
             const rayOrigin = camera.position
 
             mouse = new THREE.Vector2()
@@ -83,21 +82,66 @@ function Container() {
             // add AR button and require hit-test
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
-            // Video
-            const video = document.getElementById( 'greenscreenvideo' );
-            const videoTexture = new THREE.VideoTexture( video );
-            
-
-            // Silhouette
-            const geometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
-            const material = new THREE.MeshStandardMaterial( {
+            // Silhouette plane
+            const silhouetteGeometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
+            const silhouetteMaterial = new THREE.MeshStandardMaterial( {
                 transparent: true,
                 side: THREE.DoubleSide,
-                map: videoTexture,
+                map: silhouette,
             } );
-            const silhouetteMesh = new THREE.Mesh( geometry, material );
+            // const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
+            // scene.add( silhouetteMesh );
+            // silhouetteMesh.visible = false
+
+            // Video plane
+            const video = document.getElementById( 'greenscreenvideo' );
+
+            const vertexShader = [
+                'varying vec2 vUv;',
+                'void main(void)',
+                '{',
+                'vUv = uv;',
+                'vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );',
+                'gl_Position = projectionMatrix * mvPosition;',
+                '}'
+              ].join('\n'),
+            
+            const fragmentShader = [
+                'uniform sampler2D myTexture;',
+                'uniform vec3 color;',
+                'varying vec2 vUv;',
+                'void main(void)',
+                '{',
+                'vec3 tColor = texture2D( myTexture, vUv ).rgb;',
+                'float a = (length(tColor - color) - 0.5) * 7.0;',
+                'gl_FragColor = vec4(tColor, a);',
+                '}'
+              ].join('\n')
+            
+            const color = {default: {x: 0.1, y: 0.9, z: 0.2}, type: 'vec3', is: 'uniform'}
+
+            const videoGeometry = new THREE.PlaneBufferGeometry(3, 4, 1)
+            const videoTexture = new THREE.VideoTexture( video );
+            videoTexture.minFilter = THREE.LinearFilter
+            const videoMaterial = new THREE.ShaderMaterial( {
+                uniforms: {
+                  color: {
+                    type: 'c',
+                    value: color
+                  },
+                  myTexture: {
+                    type: 't',
+                    value: videoTexture
+                  }
+                },
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader
+            } )
+
+            const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, videoMaterial );
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
+
 
             // on user select add cylinder to the reticle position
             function onSelect() {
