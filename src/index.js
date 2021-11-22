@@ -100,7 +100,7 @@ function Container() {
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 // get first intersection point
                 const intPoint = intersects[0].point
-                console.log(intPoint)
+                console.log(intersects[0])
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
