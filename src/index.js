@@ -101,11 +101,11 @@ function Container() {
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 // get first intersection point
                 let intPoint
-                for (let intersect in intersects) {
-                    if (intersect.name === 'ground') {
-                        intPoint = intersect.point
+                intersects.forEach(int => {
+                    if (int.object.name === "ground") {
+                        intPoint = int.point
                     }
-                }
+                })
                 console.log(intersects[0])
                 console.log(intPoint)
                 // show and replace silhouette
