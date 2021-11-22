@@ -145,7 +145,7 @@ function Container() {
 
     return (
         <>
-            <StartView />
+            {/* <StartView /> */}
             <div className="scene" />
         </>
     )
