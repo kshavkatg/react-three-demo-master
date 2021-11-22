@@ -1,6 +1,7 @@
+
+require('./styles/custom.scss')
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-require('./styles/custom.scss')
 
 import * as THREE from           'three';
 import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
