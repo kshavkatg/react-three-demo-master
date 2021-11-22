@@ -83,12 +83,16 @@ function Container() {
             // add AR button and require hit-test
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
+            // Video
+            const video = document.getElementById( 'greenscreenvideo' );
+            const videoTexture = new THREE.VideoTexture( video );
+
             // Silhouette
             const geometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
             const material = new THREE.MeshStandardMaterial( {
                 transparent: true,
                 side: THREE.DoubleSide,
-                map: silhouette,
+                map: videoTexture,
             } );
             const silhouetteMesh = new THREE.Mesh( geometry, material );
             scene.add( silhouetteMesh );
