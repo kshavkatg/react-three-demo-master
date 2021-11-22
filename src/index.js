@@ -155,7 +155,7 @@ function Container() {
 
     return (
         <>
-            <video id="greenscreenvideo" playsinline preload="auto" src="./video/C008_Trinity_noeffects.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
+            <video id="greenscreenvideo" playsinline preload="auto" src="./video/Tina_Trinity_original_big.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
             <StartView />
             <div className="scene" />
         </>
