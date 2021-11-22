@@ -86,6 +86,7 @@ function Container() {
             // Video
             const video = document.getElementById( 'greenscreenvideo' );
             const videoTexture = new THREE.VideoTexture( video );
+            video.play()
 
             // Silhouette
             const geometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
