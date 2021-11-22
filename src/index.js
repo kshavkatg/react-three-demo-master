@@ -106,7 +106,7 @@ function Container() {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3)
                     silhouetteMesh.visible = true
                 } else if (silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3)
                 }
             }
 
