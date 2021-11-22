@@ -139,7 +139,6 @@ function Container() {
         }
 
         const ARButton = document.getElementById('ARButton')
-        ARButton.style = {}
         ARButton.backgroundImage = 'url("./images/start_button.png")'
 
     }, [])
