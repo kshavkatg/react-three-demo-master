@@ -102,6 +102,7 @@ function Container() {
                 // get first intersection point
                 let intPoint
                 for (let intersect in intersects) {
+                    console.log(intersect)
                     if (intersect.object.name === 'ground') {
                         intPoint = intersect.point
                     }
