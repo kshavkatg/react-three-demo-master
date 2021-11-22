@@ -73,7 +73,7 @@ function Container() {
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
                 transparent: true,
-                opacity: 0.5,
+                opacity: 0,
             }))
             planeMesh.name = 'ground'
             planeMesh.rotation.x = Math.PI / 2
@@ -84,7 +84,7 @@ function Container() {
             document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
             // Silhouette
-            const geometry = new THREE.PlaneBufferGeometry(0.7, 2, 1)
+            const geometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
             const material = new THREE.MeshStandardMaterial( {
                 transparent: true,
                 side: THREE.DoubleSide,
@@ -110,10 +110,10 @@ function Container() {
                 console.log(intPoint)
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                     silhouetteMesh.visible = true
                 } else if (silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                 }
             }
 
