@@ -134,7 +134,6 @@ class ARButton {
 		}
 
 		function stylizeElement( element ) {
-
 			element.style.position = 'absolute';
 			element.style.bottom = '20px';
 			element.style.padding = '12px 6px';
@@ -147,7 +146,7 @@ class ARButton {
 			element.style.opacity = '0.5';
 			element.style.outline = 'none';
 			element.style.zIndex = '999';
-
+        	element.style.backgroundImage = 'url("./images/start_button.png")'
 		}
 
 		if ( 'xr' in navigator ) {
