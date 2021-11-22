@@ -84,13 +84,13 @@ class ARButton {
 
 			button.onmouseenter = function () {
 
-				button.style.opacity = '1.0';
+				//button.style.opacity = '1.0';
 
 			};
 
 			button.onmouseleave = function () {
 
-				button.style.opacity = '0.5';
+				//button.style.opacity = '0.5';
 
 			};
 
