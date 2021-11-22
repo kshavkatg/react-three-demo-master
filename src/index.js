@@ -73,7 +73,7 @@ function Container() {
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
                 transparent: true,
-                opacity: 0,
+                opacity: 0.5,
             }))
             planeMesh.name = 'ground'
             planeMesh.rotation.x = Math.PI / 2
@@ -101,12 +101,12 @@ function Container() {
                 const intersects = raycaster.intersectObjects( scene.children, false );
                 // get first intersection point
                 let intPoint
+                // only get the int point with ground
                 intersects.forEach(int => {
                     if (int.object.name === "ground") {
                         intPoint = int.point
                     }
                 })
-                console.log(intersects[0])
                 console.log(intPoint)
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
