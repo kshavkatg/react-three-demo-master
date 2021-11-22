@@ -86,7 +86,7 @@ function Container() {
             // Video
             const video = document.getElementById( 'greenscreenvideo' );
             const videoTexture = new THREE.VideoTexture( video );
-            video.play()
+            
 
             // Silhouette
             const geometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
@@ -104,6 +104,7 @@ function Container() {
                 // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
+                video.play()
                 // get first intersection point
                 let intPoint
                 // only get the int point with ground
@@ -154,7 +155,7 @@ function Container() {
 
     return (
         <>
-            <video id="greenscreenvideo" autoPlay="true" playsinline preload="auto" src="./video/C008_Trinity_noeffects.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
+            <video id="greenscreenvideo" playsinline preload="auto" src="./video/C008_Trinity_noeffects.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
             <StartView />
             <div className="scene" />
         </>
