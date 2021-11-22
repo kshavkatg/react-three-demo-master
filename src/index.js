@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from           'three';
-import { ARButton } from         './libs/ARButton.js';
+import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 require('./styles/custom.scss')
