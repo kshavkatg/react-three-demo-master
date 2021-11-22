@@ -138,9 +138,6 @@ function Container() {
             renderer.render( scene, camera );
         }
 
-        const ARButton = document.getElementById('ARButton')
-        ARButton.backgroundImage = 'url("./images/start_button.png")'
-
     }, [])
 
     return (
