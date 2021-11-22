@@ -4,8 +4,8 @@ require('./styles/custom.scss')
 
 import * as THREE from           'three';
 import { ARButton } from         'three/examples/jsm/webxr/ARButton.js';
-import StartView from "./components/StartView";
 import { ControllerGestures } from './libs/ControllerGestures'
+import StartView from "./components/StartView";
 
 function Container() {
 
