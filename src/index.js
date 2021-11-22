@@ -76,7 +76,7 @@ function Container() {
                 opacity: 0,
             }))
             planeMesh.rotation.x = Math.PI / 2
-            planeMesh.position.set(0, -1.4, -2)
+            planeMesh.position.set(0, -0.5, 0)
             scene.add(planeMesh)
 
             // add AR button and require hit-test
@@ -103,10 +103,10 @@ function Container() {
                 console.log(intPoint)
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
                     silhouetteMesh.visible = true
                 } else if (silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z + 3)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y + 1, intPoint.z)
                 }
             }
 
