@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import * as THREE from           'three';
 import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
+import { Hammer } from './libs/Hammer'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton.jsx";
 require('./styles/custom.scss')
@@ -70,6 +71,10 @@ function Container() {
 
             controller.addEventListener('tap', onTouch)
             controller.addEventListener('tap', (e) => {
+                console.log('tap')
+            })
+            const hammerController = new Hammer(document.body)
+            hammerController.on('tap', () => {
                 console.log('tap')
             })
 
