@@ -5,3 +5,19 @@
 #root {
     background: black;
 }
+
+.replace_button {
+    position: absolute;
+    z-index: 10;
+    right: 20px;
+    top: 20px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+      height: auto;
+    }
+}

@@ -4,6 +4,7 @@ import * as THREE from           'three';
 import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
+import ReplaceButton from "./components/ReplaceButton.jsx";
 require('./styles/custom.scss')
 
 function Container() {
@@ -17,6 +18,7 @@ function Container() {
         let controller;
         let raycaster;
         let mouse;
+        let handleReplace;
 
 
         init();
@@ -171,6 +173,10 @@ function Container() {
                 setState(true)
             }
 
+            handleReplace = () => {
+                console.log('handle replace touch')
+            }
+
             // get Controller (touch screen)
             controller = renderer.xr.getController( 0 );
             controller.addEventListener( 'select', onSelect );
@@ -202,15 +208,14 @@ function Container() {
     }, [])
     console.log('state', state)
 
+
     return (
         <>
             <video id="greenscreenvideo" playsinline preload="auto" src="./video/Tina_Trinity_original_big.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
             <StartView />
             <div className="scene" />
             <div className="overlay">
-                <h1>test</h1>
-                <h1>test</h1>
-                <h1>test</h1>
+                <ReplaceButton onResetClick={} />
             </div>
         </>
     )
