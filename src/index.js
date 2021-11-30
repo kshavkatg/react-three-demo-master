@@ -86,7 +86,10 @@ function Container() {
             }
 
             document.body.addEventListener('click', onTouch)
-            document.body.addEventListener('touchmove', (e)=> {console.log(e)})
+            document.body.addEventListener('touchmove', (e)=> {
+                console.log('x', e.touches.clientX)
+                console.log('x', e.touches.clientX)
+            })
 
 
             // Ground planeMesh
