@@ -76,6 +76,12 @@ function Container() {
                 console.log('rotate')
             })
 
+            // cast a ray
+            raycaster = new THREE.Raycaster()
+            const rayOrigin = camera.position
+
+            mouse = new THREE.Vector2()
+
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
 	            // (-1 to +1) for both components
@@ -87,8 +93,24 @@ function Container() {
 
             document.body.addEventListener('click', onTouch)
             document.body.addEventListener('touchmove', (e)=> {
-                console.log('x', (e.touches[0].clientX / window.innerWidth ) * 2 - 1)
-                console.log('y', (e.touches[0].clientY / window.innerHeight ) * 2 - 1)
+                mouse.x = (e.touches[0].clientX / window.innerWidth ) * 2 - 1;
+                mouse.y = (e.touches[0].clientY / window.innerHeight ) * 2 - 1;
+
+                raycaster.setFromCamera( mouse, camera )
+                const intersects = raycaster.intersectObjects( scene.children, false );
+                //video.play()
+                // get first intersection point
+                let intPoint
+                // only get the int point with ground
+                intersects.forEach(int => {
+                    // The name was intentionally set above
+                    if (int.object.name === "ground") {
+                        intPoint = int.point
+                    }
+                })
+                
+                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
+                
             })
 
 
@@ -168,12 +190,6 @@ function Container() {
             const videoMesh = new THREE.Mesh( videoGeometry, videoMaterial );
             scene.add( videoMesh );
             videoMesh.visible = false
-
-            // cast a ray
-            raycaster = new THREE.Raycaster()
-            const rayOrigin = camera.position
-
-            mouse = new THREE.Vector2()
 
             // On user select
             function onSelect(event) {
