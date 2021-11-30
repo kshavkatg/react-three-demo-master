@@ -135,7 +135,8 @@ function Container() {
                   }
                 },
                 vertexShader: vertexShader,
-                fragmentShader: fragmentShader
+                fragmentShader: fragmentShader,
+                transparent: true
             } )
 
             const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, videoMaterial );
