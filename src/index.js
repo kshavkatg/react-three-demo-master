@@ -140,9 +140,9 @@ function Container() {
                 transparent: true
             } )
 
-            const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
-            scene.add( silhouetteMesh );
-            silhouetteMesh.visible = false
+            const videoMesh = new THREE.Mesh( videoGeometry, videoMaterial );
+            scene.add( videoMesh );
+            videoMesh.visible = false
 
 
             // On user select
