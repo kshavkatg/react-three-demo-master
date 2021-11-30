@@ -1,3 +1,5 @@
+import React from "react"
+
 export default function ReplaceButton({ onResetClick }) {
     return (
       <div className="replace_button" onClick={onResetClick}>
