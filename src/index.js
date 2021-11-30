@@ -176,6 +176,7 @@ function Container() {
             handleReplace = () => {
                 console.log('handle replace touch')
                 silhouetteMesh.visible = false
+                setState(!state)
             }
 
             // get Controller (touch screen)
@@ -207,7 +208,7 @@ function Container() {
         }
 
     }, [])
-    console.log('state', state)
+    console.log(handleReplace)
 
 
     return (
