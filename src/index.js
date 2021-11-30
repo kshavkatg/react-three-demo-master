@@ -240,6 +240,7 @@ function Container() {
         // Animations
         function animate() {
             renderer.setAnimationLoop( render );
+            silhouetteMesh.lookAt(camera.position)
         }
 
         // Render function from for frame depending funct
