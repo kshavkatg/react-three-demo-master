@@ -127,7 +127,7 @@ function Container() {
                 uniforms: {
                   color: {
                     type: 'c',
-                    value: {x: 0.1, y: 0.9, z: 0.2}
+                    value: {x: 0.02, y: 0.933, z: 0.321}
                   },
                   myTexture: {
                     type: 't',
