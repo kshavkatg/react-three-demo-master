@@ -18,6 +18,7 @@ function Container() {
         let controller;
         let raycaster;
         let mouse;
+        let silhouetteMesh;
 
 
         init();
@@ -134,7 +135,7 @@ function Container() {
                 side: THREE.DoubleSide,
                 map: silhouette,
             } );
-            const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
+            silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
 
