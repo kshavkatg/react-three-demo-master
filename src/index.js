@@ -54,22 +54,7 @@ function Container() {
             controller = new ControllerGestures(renderer)
             const testController = renderer.xr.getController( 0 );
             console.log('testController', testController)
-
-            // cast a ray
-            raycaster = new THREE.Raycaster()
-            const rayOrigin = camera.position
-
-            mouse = new THREE.Vector2()
-
-            const onTouch = ( event ) => {
-                // calculate mouse position in normalized device coordinates
-	            // (-1 to +1) for both components
-                console.log('tap')
-	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-                console.log(mouse.x, mouse.y)
-            }
-
+            // test gestures
             console.log('controller gestures', controller)
             //controller.addEventListener('tap', onTouch)
             controller.addEventListener('tap', (e) => {
@@ -168,9 +153,19 @@ function Container() {
             scene.add( videoMesh );
             videoMesh.visible = false
 
+            // cast a ray
+            raycaster = new THREE.Raycaster()
+            const rayOrigin = camera.position
+
+            mouse = new THREE.Vector2()
 
             // On user select
-            function onSelect() {
+            function onSelect(event) {
+                // calculate mouse position in normalized device coordinates
+	            // (-1 to +1) for both components
+	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                console.log(mouse.x, mouse.y)
                 // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
@@ -194,17 +189,16 @@ function Container() {
             }
 
             const replaceButton = document.querySelector('.replace_button')
-
             const handleReplace = () => {
                 console.log('handle replace touch')
                 silhouetteMesh.visible = false
             }
-
             replaceButton.addEventListener('click', handleReplace)
 
             // get Controller (touch screen)
             controller = renderer.xr.getController( 0 );
             controller.addEventListener( 'select', onSelect );
+            controller.addEventListener( 'select', onTouch)
             scene.add( controller );
             
             // set resize handler
