@@ -5,6 +5,7 @@ import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton.jsx";
+import { DragControls } from 'three/examples/jsm/controls/DragControls'
 require('./styles/custom.scss')
 
 function Container() {
@@ -99,6 +100,8 @@ function Container() {
             const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
+
+            const silContr = new DragControls(silhouetteMesh, camera, renderer.domElement)
 
             // Video plane
             const video = document.getElementById( 'greenscreenvideo' );

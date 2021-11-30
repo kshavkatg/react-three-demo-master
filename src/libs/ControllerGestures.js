@@ -18,7 +18,6 @@ class ControllerGestures extends THREE.EventDispatcher{
         this.controller1.addEventListener( 'selectend', onSelectEnd );
         
         this.controller2 = renderer.xr.getController(1);
-        console.log('controller2',this.controller2)
         this.controller2.userData.gestures = { index: 1 };
         this.controller2.userData.selectPressed = false;
         this.controller2.addEventListener( 'selectstart', onSelectStart );
@@ -37,9 +36,6 @@ class ControllerGestures extends THREE.EventDispatcher{
         const self = this;
         
         function onSelectStart( ){
-            console.log('this',this)
-            
-            console.log('renderer', renderer)
             const data = this.userData.gestures;
             
             data.startPosition = undefined;
@@ -83,7 +79,6 @@ class ControllerGestures extends THREE.EventDispatcher{
             data.startPosition = undefined;
             
             self.touchCount--;
-            console.log('onSelectEnd')
         }
     }
     
@@ -100,7 +95,6 @@ class ControllerGestures extends THREE.EventDispatcher{
     }
     
     get touch(){
-        console.log('touch')
         let result;
         if ( this.controller1 === undefined || this.controller2 === undefined ){   
             result = false;
