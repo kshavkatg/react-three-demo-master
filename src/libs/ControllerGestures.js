@@ -79,6 +79,7 @@ class ControllerGestures extends THREE.EventDispatcher{
             data.startPosition = undefined;
             
             self.touchCount--;
+            console.log('onSelectEnd')
         }
     }
     
@@ -95,6 +96,7 @@ class ControllerGestures extends THREE.EventDispatcher{
     }
     
     get touch(){
+        console.log('touch')
         let result;
         if ( this.controller1 === undefined || this.controller2 === undefined ){   
             result = false;
