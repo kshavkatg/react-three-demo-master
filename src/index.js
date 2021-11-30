@@ -76,6 +76,18 @@ function Container() {
                 console.log('rotate')
             })
 
+            const onTouch = ( event ) => {
+                // calculate mouse position in normalized device coordinates
+	            // (-1 to +1) for both components
+                console.log('tap')
+	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                console.log(mouse.x, mouse.y)
+            }
+
+            document.body.addEventListener('click', onTouch)
+
+
             // Ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
@@ -161,11 +173,6 @@ function Container() {
 
             // On user select
             function onSelect(event) {
-                // calculate mouse position in normalized device coordinates
-	            // (-1 to +1) for both components
-	            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-                console.log(mouse.x, mouse.y)
                 // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
