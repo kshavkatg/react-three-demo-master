@@ -5,11 +5,12 @@ import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton.jsx";
+import { useRef } from "react/cjs/react.development";
 require('./styles/custom.scss')
 
 function Container() {
     const [state, setState] = useState(false)
-    let handleReplace;
+    const handleReplace = useRef()
 
     // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
@@ -173,7 +174,7 @@ function Container() {
                 setState(true)
             }
 
-            handleReplace = () => {
+            handleReplace.current = () => {
                 console.log('handle replace touch')
                 silhouetteMesh.visible = false
                 setState(!state)
