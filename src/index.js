@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from           'three';
 import { ARButton } from         './libs/ARButton.js';
@@ -7,6 +7,7 @@ import StartView from "./components/StartView";
 require('./styles/custom.scss')
 
 function Container() {
+    const [state, setState] = useState(false)
 
     // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
@@ -68,7 +69,7 @@ function Container() {
 
             gestures.addEventListener('tap', onTouch)
 
-            // TEST ground planeMesh
+            // Ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
                 transparent: true,
@@ -89,13 +90,13 @@ function Container() {
                 side: THREE.DoubleSide,
                 map: silhouette,
             } );
-            // const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
-            // scene.add( silhouetteMesh );
-            // silhouetteMesh.visible = false
+            const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
+            scene.add( silhouetteMesh );
+            silhouetteMesh.visible = false
 
             // Video plane
             const video = document.getElementById( 'greenscreenvideo' );
-
+            // CHROMAKEY CUT Shader
             const vertexShader = [
                 'varying vec2 vUv;',
                 'void main(void)',
@@ -139,12 +140,12 @@ function Container() {
                 transparent: true
             } )
 
-            const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, videoMaterial );
+            const silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
 
 
-            // on user select add cylinder to the reticle position
+            // On user select
             function onSelect() {
                 // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
@@ -154,6 +155,7 @@ function Container() {
                 let intPoint
                 // only get the int point with ground
                 intersects.forEach(int => {
+                    // The name was intentionally set above
                     if (int.object.name === "ground") {
                         intPoint = int.point
                     }
@@ -166,6 +168,7 @@ function Container() {
                 } else if (silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                 }
+                setState(true)
             }
 
             // get Controller (touch screen)
