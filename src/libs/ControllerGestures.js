@@ -36,6 +36,8 @@ class ControllerGestures extends THREE.EventDispatcher{
         const self = this;
         
         function onSelectStart( ){
+            console.log('controller1',this.controller1)
+            console.log('controller2',this.controller2)
             const data = this.userData.gestures;
             
             data.startPosition = undefined;
