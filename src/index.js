@@ -109,6 +109,7 @@ function Container() {
                     }
                 })
                 silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
+                silhouetteMesh.lookAt({x: camera.position.x, y: silhouetteMesh.position.y, z: camera.position.z})
             })
 
 
@@ -209,6 +210,7 @@ function Container() {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                     silhouetteMesh.visible = true
                 }
+                silhouetteMesh.lookAt({x: camera.position.x, y: silhouetteMesh.position.y, z: camera.position.z})
             }
 
             const replaceButton = document.querySelector('.replace_button')
