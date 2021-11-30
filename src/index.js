@@ -205,8 +205,10 @@ function Container() {
                     }
                 })
                 // Place silhouette
-                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
-                silhouetteMesh.visible = true
+                if (!silhouetteMesh.visible) {
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
+                    silhouetteMesh.visible = true
+                }
             }
 
             const replaceButton = document.querySelector('.replace_button')
