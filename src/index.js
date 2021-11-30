@@ -52,6 +52,8 @@ function Container() {
 
             // get gestures for multi-touch events
             controller = new ControllerGestures(renderer)
+            const testController = renderer.xr.getController( 0 );
+            console.log('testController', testController)
 
             // cast a ray
             raycaster = new THREE.Raycaster()
