@@ -150,7 +150,7 @@ function Container() {
                 // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
-                video.play()
+                //video.play()
                 // get first intersection point
                 let intPoint
                 // only get the int point with ground
@@ -207,6 +207,7 @@ function Container() {
             <video id="greenscreenvideo" playsinline preload="auto" src="./video/Tina_Trinity_original_big.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
             <StartView />
             <div className="scene" />
+            <div className="overlay" />
         </>
     )
 }

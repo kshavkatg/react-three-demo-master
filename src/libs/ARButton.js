@@ -8,7 +8,7 @@ class ARButton {
 
 			if ( sessionInit.domOverlay === undefined ) {
 
-				var overlay = document.createElement( 'div' );
+				var overlay = document.querySelector( '.overlay' );
 				overlay.style.display = 'none';
 				document.body.appendChild( overlay );
 
