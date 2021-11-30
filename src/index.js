@@ -5,12 +5,10 @@ import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton.jsx";
-import { useRef } from "react/cjs/react.development";
 require('./styles/custom.scss')
 
 function Container() {
-    const [state, setState] = useState(false)
-    const handleReplace = useRef()
+    const [silhouette, setSilhouette] = useState({})
 
     // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
@@ -171,14 +169,16 @@ function Container() {
                 } else if (silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                 }
-                setState(true)
             }
 
-            handleReplace.current = () => {
+            const replaceButton = document.querySelector('.replace_button')
+
+            const handleReplace = () => {
                 console.log('handle replace touch')
                 silhouetteMesh.visible = false
-                setState(!state)
             }
+
+            replaceButton.addEventListener('click', handleReplace)
 
             // get Controller (touch screen)
             controller = renderer.xr.getController( 0 );
@@ -209,7 +209,6 @@ function Container() {
         }
 
     }, [])
-    console.log(handleReplace)
 
 
     return (
@@ -218,7 +217,7 @@ function Container() {
             <StartView />
             <div className="scene" />
             <div className="overlay">
-                <ReplaceButton onResetClick={handleReplace} />
+                <ReplaceButton />
             </div>
         </>
     )
