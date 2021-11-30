@@ -118,7 +118,7 @@ function Container() {
                 '}'
               ].join('\n')
             
-            const color = {default: {x: 0.1, y: 0.9, z: 0.2}, type: 'vec3', is: 'uniform'}
+            const color = {default: {x: 0.02, y: 0.933, z: 0.321}, type: 'vec3', is: 'uniform'}
 
             const videoGeometry = new THREE.PlaneBufferGeometry(3, 4, 1)
             const videoTexture = new THREE.VideoTexture( video );
