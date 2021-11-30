@@ -198,7 +198,6 @@ function Container() {
             // get Controller (touch screen)
             controller = renderer.xr.getController( 0 );
             controller.addEventListener( 'select', onSelect );
-            controller.addEventListener( 'select', onTouch)
             scene.add( controller );
             
             // set resize handler
