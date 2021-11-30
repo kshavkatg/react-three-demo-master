@@ -9,6 +9,7 @@ require('./styles/custom.scss')
 
 function Container() {
     const [state, setState] = useState(false)
+    let handleReplace;
 
     // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
@@ -18,7 +19,6 @@ function Container() {
         let controller;
         let raycaster;
         let mouse;
-        let handleReplace;
 
 
         init();
@@ -215,7 +215,7 @@ function Container() {
             <StartView />
             <div className="scene" />
             <div className="overlay">
-                <ReplaceButton onResetClick={} />
+                <ReplaceButton onResetClick={handleReplace} />
             </div>
         </>
     )
