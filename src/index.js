@@ -9,7 +9,6 @@ import { DragControls } from 'three/examples/jsm/controls/DragControls'
 require('./styles/custom.scss')
 
 function Container() {
-    const [silhouette, setSilhouette] = useState({})
 
     // Three.js functionality is all inside useEffect on comp mount
     useEffect(() => {
@@ -71,9 +70,25 @@ function Container() {
                 console.log(mouse.x, mouse.y)
             }
 
-            controller.addEventListener('tap', onTouch)
+            console.log('controller gestures', controller)
+            //controller.addEventListener('tap', onTouch)
             controller.addEventListener('tap', (e) => {
                 console.log('tap')
+            })
+            controller.addEventListener('press', (e) => {
+                console.log('press')
+            })
+            controller.addEventListener('pan', (e) => {
+                console.log('pan')
+            })
+            controller.addEventListener('swipe', (e) => {
+                console.log('swipe')
+            })
+            controller.addEventListener('pinch', (e) => {
+                console.log('pinch')
+            })
+            controller.addEventListener('rotate', (e) => {
+                console.log('rotate')
             })
 
             // Ground planeMesh
