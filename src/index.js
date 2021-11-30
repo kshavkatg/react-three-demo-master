@@ -108,9 +108,7 @@ function Container() {
                         intPoint = int.point
                     }
                 })
-
                 silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
-                
             })
 
 
@@ -206,13 +204,9 @@ function Container() {
                         intPoint = int.point
                     }
                 })
-                // show and replace silhouette
-                if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
-                    silhouetteMesh.visible = true
-                } else if (silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
-                }
+                // Place silhouette
+                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
+                silhouetteMesh.visible = true
             }
 
             const replaceButton = document.querySelector('.replace_button')
