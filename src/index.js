@@ -69,6 +69,9 @@ function Container() {
             }
 
             controller.addEventListener('tap', onTouch)
+            controller.addEventListener('tap', (e) => {
+                console.log('tap')
+            })
 
             // Ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
