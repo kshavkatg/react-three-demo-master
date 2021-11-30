@@ -88,7 +88,7 @@ function Container() {
             document.body.addEventListener('click', onTouch)
             document.body.addEventListener('touchmove', (e)=> {
                 console.log('x', e.touches[0].clientX)
-                console.log('y', e.touches[0].clientX)
+                console.log('y', e.touches[0].clientY)
             })
 
 
