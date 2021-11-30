@@ -200,6 +200,7 @@ function Container() {
         }
 
     }, [])
+    console.log('state', state)
 
     return (
         <>
