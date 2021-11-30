@@ -207,7 +207,11 @@ function Container() {
             <video id="greenscreenvideo" playsinline preload="auto" src="./video/Tina_Trinity_original_big.mp4" response-type="arraybuffer" style={{opacity: 0}}></video>
             <StartView />
             <div className="scene" />
-            <div className="overlay" />
+            <div className="overlay">
+                <h1>test</h1>
+                <h1>test</h1>
+                <h1>test</h1>
+            </div>
         </>
     )
 }
