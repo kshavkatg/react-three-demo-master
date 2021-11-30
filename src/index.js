@@ -51,7 +51,7 @@ function Container() {
             container.appendChild( renderer.domElement );
 
             // get gestures for multi-touch events
-            const gestures = new ControllerGestures(renderer)
+            controller = new ControllerGestures(renderer)
 
             // cast a ray
             raycaster = new THREE.Raycaster()
@@ -68,7 +68,7 @@ function Container() {
                 console.log(mouse.x, mouse.y)
             }
 
-            gestures.addEventListener('tap', onTouch)
+            controller.addEventListener('tap', onTouch)
 
             // Ground planeMesh
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
@@ -161,7 +161,6 @@ function Container() {
                         intPoint = int.point
                     }
                 })
-                console.log(intPoint)
                 // show and replace silhouette
                 if (!silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
