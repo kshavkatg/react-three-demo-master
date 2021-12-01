@@ -246,7 +246,7 @@ function Container() {
                 }
 
                 // Start video
-                startVideoButton.style.display = 'inherit'
+                if (!videoMesh.visible) startVideoButton.style.display = 'inherit'
                 startVideoButton.addEventListener('click', handleStartVideo)
             }
 
