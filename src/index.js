@@ -4,7 +4,8 @@ import * as THREE from           'three';
 import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
-import ReplaceButton from "./components/ReplaceButton.jsx";
+import ReplaceButton from "./components/ReplaceButton";
+import RecordButton from "./components/RecordButton";
 require('./styles/custom.scss')
 
 function Container() {
@@ -296,6 +297,7 @@ function Container() {
             <div className="scene" />
             <div className="overlay">
                 <ReplaceButton />
+                <RecordButton />
                 <img className='start_video' src='./images/start_video_button.png' alt='start' />
             </div>
         </>
