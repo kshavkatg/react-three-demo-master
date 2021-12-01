@@ -201,8 +201,24 @@ function Container() {
                 videoMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3)
             })
 
+            // Replace
+            const handleReplace = () => {
+                // first if replace is before video start
+                if (silhouetteMesh.visible) silhouetteMesh.visible = false
+                // second if replace is after video start
+                if (!video.paused) {
+                    // stop the video
+                    videoMesh.visible = false
+                    video.pause()
+                    video.currentTime = 0
+                }
+            }
+            replaceButton.addEventListener('click', handleReplace)
+
+            // Video start Click
             const handleStartVideo = () => {
                 videoMesh.visible = true
+                silhouetteMesh.visible = false
                 video.play()
                 startVideoButton.style.display = 'none'
             }
@@ -233,13 +249,6 @@ function Container() {
                 startVideoButton.style.display = 'inherit'
                 startVideoButton.addEventListener('click', handleStartVideo)
             }
-
-            // Replace
-            const handleReplace = () => {
-                console.log('handle replace touch')
-                silhouetteMesh.visible = false
-            }
-            replaceButton.addEventListener('click', handleReplace)
 
             // get Controller (touch screen)
             controller = renderer.xr.getController( 0 );
