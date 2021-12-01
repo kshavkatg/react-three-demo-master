@@ -76,14 +76,14 @@ function Container() {
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
 
-            // Silhouette Video match plane
-            const matchGeometry = new THREE.PlaneBufferGeometry(5, 5.1, 1)
-            const matchMaterial = new THREE.MeshStandardMaterial( {
-                map: matchTexture
-            })
-            const matchMesh = new THREE.Mesh(matchGeometry, matchMaterial)
-            scene.add( matchMesh )
-            matchMesh.visible = false
+            // // Silhouette Video match plane
+            // const matchGeometry = new THREE.PlaneBufferGeometry(5, 5.1, 1)
+            // const matchMaterial = new THREE.MeshStandardMaterial( {
+            //     map: matchTexture
+            // })
+            // const matchMesh = new THREE.Mesh(matchGeometry, matchMaterial)
+            // scene.add( matchMesh )
+            // matchMesh.visible = false
 
             // Video plane
             const video = document.getElementById( 'greenscreenvideo' );
@@ -112,7 +112,7 @@ function Container() {
             
             const color = {default: {x: 0.02, y: 0.933, z: 0.321}, type: 'vec3', is: 'uniform'}
 
-            const videoGeometry = new THREE.PlaneBufferGeometry(3, 4, 1)
+            const videoGeometry = new THREE.PlaneBufferGeometry(5, 5.1, 1)
             const videoTexture = new THREE.VideoTexture( video );
             videoTexture.minFilter = THREE.LinearFilter
             const videoMaterial = new THREE.ShaderMaterial( {
@@ -198,8 +198,14 @@ function Container() {
                     }
                 })
                 silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z-3)
-                matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
+                videoMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3)
             })
+
+            const handleStartVideo = () => {
+                matchMesh.visible = true
+                video.play()
+                startVideoButton.style.display = 'none'
+            }
 
             // On user select
             function onSelect(event) {
@@ -219,10 +225,8 @@ function Container() {
                 // Place silhouette
                 if (!silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 3)
+                    videoMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
                     silhouetteMesh.visible = true
-
-                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
-                    matchMesh.visible = true
                 }
 
                 // Start video
