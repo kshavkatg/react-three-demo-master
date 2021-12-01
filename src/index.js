@@ -170,7 +170,6 @@ function Container() {
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
             const replaceButton = document.querySelector('.replace_button')
-            const arButton = document.querySelector('.ar_button')
 
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates

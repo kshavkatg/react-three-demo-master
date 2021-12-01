@@ -73,7 +73,6 @@ class ARButton {
 			}
 
 			//
-			button.classList.add('ar_button')
 
 			button.style.display = '';
 
@@ -100,7 +99,7 @@ class ARButton {
 				if ( currentSession === null ) {
 
 					navigator.xr.requestSession( 'immersive-ar', sessionInit ).then( onSessionStarted );
-
+					console.log(window.threeScene)
 				} else {
 					const video = document.getElementById( 'greenscreenvideo' );
 					currentSession.end();
