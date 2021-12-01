@@ -193,8 +193,8 @@ function Container() {
                         intPoint = int.point
                     }
                 })
-                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z-10)
-                matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 10.1)
+                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z-4)
+                matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 4.1)
                 silhouetteMesh.lookAt(camera.position)
             })
 
@@ -215,10 +215,10 @@ function Container() {
                 })
                 // Place silhouette
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 10)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 4)
                     silhouetteMesh.visible = true
 
-                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 10.1)
+                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 4.1)
                     matchMesh.visible = true
                 }
                 silhouetteMesh.lookAt(camera.position)
