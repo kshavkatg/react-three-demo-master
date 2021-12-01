@@ -174,6 +174,7 @@ function Container() {
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
             const replaceButton = document.querySelector('.replace_button')
+            const recordButton = document.querySelector('#recorder')
 
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
@@ -228,7 +229,11 @@ function Container() {
             }
 
             replaceButton.addEventListener('click', handleReplace)
-            video.addEventListener('playing', () => {console.log('video is playing')})
+            // show recorder when video is playing
+            video.addEventListener('playing', () => {
+                recordButton.classList.remove('fade-container')
+                recordButton.classList.add('active')
+            })
 
             // On user select
             function onSelect(event) {
