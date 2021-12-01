@@ -6,6 +6,7 @@ class ARButton {
 
 		function showStartAR( /*device*/ ) {
 			const video = document.getElementById( 'greenscreenvideo' );
+			const startVideoButton = document.querySelector('.start_video')
 			let videoMesh, silhouetteMesh;
 
 			if ( sessionInit.domOverlay === undefined ) {
@@ -60,7 +61,7 @@ class ARButton {
 				sessionInit.domOverlay.root.style.display = '';
 
 				currentSession = session;
-
+				
 				window.threeScene.children.forEach(child => {
 					if (child.name === "silhouette") {
 						console.log('assign silhouette')
@@ -81,10 +82,11 @@ class ARButton {
 				sessionInit.domOverlay.root.style.display = 'none';
 
 				currentSession = null;
-				console.log('session end')
 				
-				if (silhouetteMesh.visible) silhouetteMesh.visible = false
-                if (!video.paused) {
+				if (silhouetteMesh.visible) {
+					silhouetteMesh.visible = false
+					startVideoButton.style.display = 'none'
+				} else if (!video.paused) {
                     // stop the video
                     videoMesh.visible = false
                     video.pause()
