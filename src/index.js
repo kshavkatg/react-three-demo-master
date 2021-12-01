@@ -228,7 +228,7 @@ function Container() {
             }
 
             replaceButton.addEventListener('click', handleReplace)
-            
+            video.addEventListener('playing', () => {console.log('video is playing')})
 
             // On user select
             function onSelect(event) {
