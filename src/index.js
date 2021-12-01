@@ -202,7 +202,7 @@ function Container() {
             })
 
             const handleStartVideo = () => {
-                matchMesh.visible = true
+                videoMesh.visible = true
                 video.play()
                 startVideoButton.style.display = 'none'
             }
