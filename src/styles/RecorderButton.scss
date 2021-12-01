@@ -134,3 +134,18 @@
     opacity: 0;
     pointer-events: none;
   }
+
+  
+.progress-track, .progress-bar, .loading-circle {
+    stroke-width: 0.08rem;
+}
+#recorder {
+  display: none;
+  #recorder-button {
+    background: #FE5842;
+    transform: scale(0.67);
+  }
+}
+.fixed-mode #recorder-button {
+  transform: scale(0.4) !important;
+}
