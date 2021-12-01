@@ -7,6 +7,7 @@ class ARButton {
 		function showStartAR( /*device*/ ) {
 			const video = document.getElementById( 'greenscreenvideo' );
 			const startVideoButton = document.querySelector('.start_video')
+			const recordButton = document.querySelector('#recorder')
 			let videoMesh, silhouetteMesh;
 
 			if ( sessionInit.domOverlay === undefined ) {
@@ -91,6 +92,7 @@ class ARButton {
                     videoMesh.visible = false
                     video.pause()
                     video.currentTime = 0
+					recordButton.classList.add('fade-container')
                 }
 			}
 

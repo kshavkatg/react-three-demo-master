@@ -217,6 +217,7 @@ function Container() {
                     videoMesh.visible = false
                     video.pause()
                     video.currentTime = 0
+                    recordButton.classList.add('fade-container')
                 }
             }
 
