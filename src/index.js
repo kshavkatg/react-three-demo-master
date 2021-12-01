@@ -212,6 +212,7 @@ function Container() {
                     video.pause()
                     video.currentTime = 0
                 }
+                if (startVideoButton.style.display === 'none') startVideoButton.style.display = 'inherit'
             }
             replaceButton.addEventListener('click', handleReplace)
 
