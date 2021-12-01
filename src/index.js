@@ -215,7 +215,7 @@ function Container() {
                 })
                 // Place silhouette
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 2.5)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 10)
                     silhouetteMesh.visible = true
 
                     matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 1.1)
