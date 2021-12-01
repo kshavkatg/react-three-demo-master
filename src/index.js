@@ -236,7 +236,7 @@ function Container() {
             }
 
             replaceButton.addEventListener('click', handleReplace)
-            arButton.addEventListener('click', handleClose)
+            
 
             // On user select
             function onSelect(event) {
@@ -263,6 +263,7 @@ function Container() {
                 // Start video
                 if (!videoMesh.visible) startVideoButton.style.display = 'inherit'
                 startVideoButton.addEventListener('click', handleStartVideo)
+                arButton.addEventListener('touch', handleClose)
             }
 
             // get Controller (touch screen)
