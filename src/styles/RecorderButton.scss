@@ -135,12 +135,11 @@
     pointer-events: none;
   }
 
-  
+
 .progress-track, .progress-bar, .loading-circle {
     stroke-width: 0.08rem;
 }
 #recorder {
-  display: none;
   #recorder-button {
     background: #FE5842;
     transform: scale(0.67);
