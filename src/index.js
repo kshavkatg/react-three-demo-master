@@ -206,9 +206,10 @@ function Container() {
             // Replace
             const handleReplace = () => {
                 // first if replace is before video start
-                if (silhouetteMesh.visible) silhouetteMesh.visible = false
-                // second if replace is after video start
-                if (!video.paused) {
+                if (silhouetteMesh.visible) {
+					silhouetteMesh.visible = false
+					startVideoButton.style.display = 'none'
+				} else if (!video.paused) {
                     // stop the video
                     videoMesh.visible = false
                     video.pause()
@@ -222,17 +223,6 @@ function Container() {
                 silhouetteMesh.visible = false
                 video.play()
                 startVideoButton.style.display = 'none'
-            }
-
-            // Handle close click
-            const handleClose = () => {
-                if (silhouetteMesh.visible) silhouetteMesh.visible = false
-                if (!video.paused) {
-                    // stop the video
-                    videoMesh.visible = false
-                    video.pause()
-                    video.currentTime = 0
-                }
             }
 
             replaceButton.addEventListener('click', handleReplace)
