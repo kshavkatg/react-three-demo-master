@@ -5,7 +5,6 @@ import { ARButton } from         './libs/ARButton.js';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton.jsx";
-import { DragControls } from 'three/examples/jsm/controls/DragControls'
 require('./styles/custom.scss')
 
 function Container() {
@@ -34,6 +33,7 @@ function Container() {
             // load Textures
             const textureLoader = new THREE.TextureLoader()
             const silhouette = textureLoader.load('./textures/silhouette.png')
+            const matchTexture = textureLoader.load('./textures/video_match.png')
 
             // set Camera
             camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
@@ -50,6 +50,90 @@ function Container() {
             // enable XR and use container
             renderer.xr.enabled = true;
             container.appendChild( renderer.domElement );
+
+            // Ground planeMesh
+            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0,
+            }))
+            planeMesh.name = 'ground'
+            planeMesh.rotation.x = Math.PI / 2
+            planeMesh.position.set(0, -0.5, 0)
+            scene.add(planeMesh)
+
+            // add AR button and require hit-test
+            document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
+
+            // Silhouette plane
+            const silhouetteGeometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
+            const silhouetteMaterial = new THREE.MeshStandardMaterial( {
+                transparent: true,
+                side: THREE.DoubleSide,
+                map: silhouette,
+            } );
+            silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
+            scene.add( silhouetteMesh );
+            silhouetteMesh.visible = false
+
+            // Silhouette Video match plane
+            const matchGeometry = new THREE.PlaneBufferGeometry(5, 5.1, 1)
+            const matchMaterial = new THREE.MeshStandardMaterial( {
+                map: matchTexture
+            })
+            const matchMesh = new THREE.Mesh(matchGeometry, matchMaterial)
+            scene.add( matchMesh )
+            matchMesh.visible = false
+
+            // Video plane
+            const video = document.getElementById( 'greenscreenvideo' );
+            // CHROMAKEY CUT Shader
+            const vertexShader = [
+                'varying vec2 vUv;',
+                'void main(void)',
+                '{',
+                'vUv = uv;',
+                'vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );',
+                'gl_Position = projectionMatrix * mvPosition;',
+                '}'
+              ].join('\n')
+            
+            const fragmentShader = [
+                'uniform sampler2D myTexture;',
+                'uniform vec3 color;',
+                'varying vec2 vUv;',
+                'void main(void)',
+                '{',
+                'vec3 tColor = texture2D( myTexture, vUv ).rgb;',
+                'float a = (length(tColor - color) - 0.5) * 7.0;',
+                'gl_FragColor = vec4(tColor, a);',
+                '}'
+              ].join('\n')
+            
+            const color = {default: {x: 0.02, y: 0.933, z: 0.321}, type: 'vec3', is: 'uniform'}
+
+            const videoGeometry = new THREE.PlaneBufferGeometry(3, 4, 1)
+            const videoTexture = new THREE.VideoTexture( video );
+            videoTexture.minFilter = THREE.LinearFilter
+            const videoMaterial = new THREE.ShaderMaterial( {
+                uniforms: {
+                  color: {
+                    type: 'c',
+                    value: {x: 0.02, y: 0.933, z: 0.321}
+                  },
+                  myTexture: {
+                    type: 't',
+                    value: videoTexture
+                  }
+                },
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true
+            } )
+
+            const videoMesh = new THREE.Mesh( videoGeometry, videoMaterial );
+            scene.add( videoMesh );
+            videoMesh.visible = false
 
             // get gestures for multi-touch events
             controller = new ControllerGestures(renderer)
@@ -110,86 +194,9 @@ function Container() {
                     }
                 })
                 silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
+                matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 0.1)
                 silhouetteMesh.lookAt(camera.position)
             })
-
-
-            // Ground planeMesh
-            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
-                side: THREE.DoubleSide,
-                transparent: true,
-                opacity: 0,
-            }))
-            planeMesh.name = 'ground'
-            planeMesh.rotation.x = Math.PI / 2
-            planeMesh.position.set(0, -0.5, 0)
-            scene.add(planeMesh)
-
-            // add AR button and require hit-test
-            document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
-
-            // Silhouette plane
-            const silhouetteGeometry = new THREE.PlaneBufferGeometry(1.4, 4, 1)
-            const silhouetteMaterial = new THREE.MeshStandardMaterial( {
-                transparent: true,
-                side: THREE.DoubleSide,
-                map: silhouette,
-            } );
-            silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
-            scene.add( silhouetteMesh );
-            silhouetteMesh.visible = false
-
-            const silContr = new DragControls(silhouetteMesh, camera, renderer.domElement)
-
-            // Video plane
-            const video = document.getElementById( 'greenscreenvideo' );
-            // CHROMAKEY CUT Shader
-            const vertexShader = [
-                'varying vec2 vUv;',
-                'void main(void)',
-                '{',
-                'vUv = uv;',
-                'vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );',
-                'gl_Position = projectionMatrix * mvPosition;',
-                '}'
-              ].join('\n')
-            
-            const fragmentShader = [
-                'uniform sampler2D myTexture;',
-                'uniform vec3 color;',
-                'varying vec2 vUv;',
-                'void main(void)',
-                '{',
-                'vec3 tColor = texture2D( myTexture, vUv ).rgb;',
-                'float a = (length(tColor - color) - 0.5) * 7.0;',
-                'gl_FragColor = vec4(tColor, a);',
-                '}'
-              ].join('\n')
-            
-            const color = {default: {x: 0.02, y: 0.933, z: 0.321}, type: 'vec3', is: 'uniform'}
-
-            const videoGeometry = new THREE.PlaneBufferGeometry(3, 4, 1)
-            const videoTexture = new THREE.VideoTexture( video );
-            videoTexture.minFilter = THREE.LinearFilter
-            const videoMaterial = new THREE.ShaderMaterial( {
-                uniforms: {
-                  color: {
-                    type: 'c',
-                    value: {x: 0.02, y: 0.933, z: 0.321}
-                  },
-                  myTexture: {
-                    type: 't',
-                    value: videoTexture
-                  }
-                },
-                vertexShader: vertexShader,
-                fragmentShader: fragmentShader,
-                transparent: true
-            } )
-
-            const videoMesh = new THREE.Mesh( videoGeometry, videoMaterial );
-            scene.add( videoMesh );
-            videoMesh.visible = false
 
             // On user select
             function onSelect(event) {
@@ -210,6 +217,9 @@ function Container() {
                 if (!silhouetteMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
                     silhouetteMesh.visible = true
+
+                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 0.1)
+                    matchMesh.visible = true
                 }
                 silhouetteMesh.lookAt(camera.position)
             }
