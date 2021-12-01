@@ -55,6 +55,7 @@ function Container() {
             const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(1000, 1000, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
                 transparent: true,
+                depthWrite: false,
                 opacity: 0,
             }))
             planeMesh.name = 'ground'
