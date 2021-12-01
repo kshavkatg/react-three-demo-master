@@ -170,7 +170,6 @@ function Container() {
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
             const replaceButton = document.querySelector('.replace_button')
-            const closeButton = document.querySelector('.close_svg')
 
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
@@ -236,7 +235,6 @@ function Container() {
             }
 
             replaceButton.addEventListener('click', handleReplace)
-            closeButton.addEventListener('click', handleClose)
             
 
             // On user select

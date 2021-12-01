@@ -18,7 +18,6 @@ class ARButton {
 				svg.style.position = 'absolute';
 				svg.style.left = '20px';
 				svg.style.top = '20px';
-				svg.classList.add('close_svg')
 				svg.addEventListener( 'click', function () {
 
 					currentSession.end();
@@ -70,6 +69,7 @@ class ARButton {
 				sessionInit.domOverlay.root.style.display = 'none';
 
 				currentSession = null;
+				console.log('session end')
 
 			}
 
