@@ -239,7 +239,7 @@ function Container() {
                     }
                 })
                 // Place silhouette
-                if (!silhouetteMesh.visible) {
+                if (!silhouetteMesh.visible && !videoMesh.visible) {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 3)
                     videoMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
                     silhouetteMesh.visible = true
