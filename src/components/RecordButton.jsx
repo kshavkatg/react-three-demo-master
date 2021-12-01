@@ -6,6 +6,8 @@ export default function RecordButton() {
     const video = document.getElementById( 'greenscreenvideo' );
 		const startVideoButton = document.querySelector('.start_video')
 		const recordButton = document.querySelector('#recorder')
+    let stream, recorder, mixedStream, audio, recordedVideo;
+    let chunks = [];
 
   async function setupStream () {
     try {
@@ -21,7 +23,6 @@ export default function RecordButton() {
         },
       });
   
-      setupVideoFeedback();
     } catch (err) {
       console.error(err)
     }
@@ -61,9 +62,9 @@ export default function RecordButton() {
     const blob = new Blob(chunks, { 'type' : 'video/mp4' });
     chunks = [];
   
-    downloadButton.href = URL.createObjectURL(blob);
-    downloadButton.download = 'video.mp4';
-    downloadButton.disabled = false;
+    // downloadButton.href = URL.createObjectURL(blob);
+    // downloadButton.download = 'video.mp4';
+    // downloadButton.disabled = false;
   
     recordedVideo.src = URL.createObjectURL(blob);
     recordedVideo.load();
