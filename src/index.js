@@ -170,6 +170,7 @@ function Container() {
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
             const replaceButton = document.querySelector('.replace_button')
+            const arButton = document.querySelector('.ar_button')
 
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
@@ -214,7 +215,6 @@ function Container() {
                 }
                 if (startVideoButton.style.display === 'none') startVideoButton.style.display = 'inherit'
             }
-            replaceButton.addEventListener('click', handleReplace)
 
             // Video start Click
             const handleStartVideo = () => {
@@ -223,6 +223,20 @@ function Container() {
                 video.play()
                 startVideoButton.style.display = 'none'
             }
+
+            // Handle close click
+            const handleClose = () => {
+                if (silhouetteMesh.visible) silhouetteMesh.visible = false
+                if (!video.paused) {
+                    // stop the video
+                    videoMesh.visible = false
+                    video.pause()
+                    video.currentTime = 0
+                }
+            }
+
+            replaceButton.addEventListener('click', handleReplace)
+            arButton.addEventListener('click', handleClose)
 
             // On user select
             function onSelect(event) {

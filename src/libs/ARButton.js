@@ -73,6 +73,7 @@ class ARButton {
 			}
 
 			//
+			button.classList.add('ar_button')
 
 			button.style.display = '';
 
@@ -103,7 +104,7 @@ class ARButton {
 				} else {
 
 					currentSession.end();
-
+										
 				}
 
 			};
