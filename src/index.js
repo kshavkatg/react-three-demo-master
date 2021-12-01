@@ -73,6 +73,7 @@ function Container() {
                 map: silhouette,
             } );
             silhouetteMesh = new THREE.Mesh( silhouetteGeometry, silhouetteMaterial );
+            silhouetteMesh.name = 'silhouette'
             scene.add( silhouetteMesh );
             silhouetteMesh.visible = false
 
@@ -132,6 +133,7 @@ function Container() {
             } )
 
             const videoMesh = new THREE.Mesh( videoGeometry, videoMaterial );
+            videoMesh.name = 'video_plane'
             scene.add( videoMesh );
             videoMesh.visible = false
 
