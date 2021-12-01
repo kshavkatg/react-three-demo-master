@@ -263,7 +263,6 @@ function Container() {
                 // Start video
                 if (!videoMesh.visible) startVideoButton.style.display = 'inherit'
                 startVideoButton.addEventListener('click', handleStartVideo)
-                arButton.addEventListener('touch', handleClose)
             }
 
             // get Controller (touch screen)
@@ -273,6 +272,9 @@ function Container() {
             
             // set resize handler
             window.addEventListener( 'resize', onWindowResize );
+
+            // add scene to Window
+            window.threeScene = scene
         }
 
         // resize handler

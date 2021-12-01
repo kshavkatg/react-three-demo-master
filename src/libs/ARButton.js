@@ -102,8 +102,15 @@ class ARButton {
 					navigator.xr.requestSession( 'immersive-ar', sessionInit ).then( onSessionStarted );
 
 				} else {
-
+					const video = document.getElementById( 'greenscreenvideo' );
 					currentSession.end();
+					if (!video.paused) {
+						// stop the video
+						videoMesh.visible = false
+						video.pause()
+						video.currentTime = 0
+					}
+					console.log(window.threeScene)
 										
 				}
 
