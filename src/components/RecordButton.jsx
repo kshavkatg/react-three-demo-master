@@ -11,9 +11,6 @@ export default function RecordButton() {
 
   async function setupStream () {
     try {
-      stream = await navigator.mediaDevices.getDisplayMedia({
-        video: true
-      });
   
       audio = await navigator.mediaDevices.getUserMedia({
         audio: {
@@ -21,6 +18,7 @@ export default function RecordButton() {
           noiseSuppression: true,
           sampleRate: 44100,
         },
+        video: { width: 1280, height: 720 }
       });
   
     } catch (err) {
@@ -31,8 +29,8 @@ export default function RecordButton() {
   async function startRecording () {
     await setupStream();
   
-    if (stream && audio) {
-      mixedStream = new MediaStream([...stream.getTracks(), ...audio.getTracks()]);
+    if (audio) {
+      mixedStream = new MediaStream([ ...audio.getTracks()]);
       recorder = new MediaRecorder(mixedStream);
       recorder.ondataavailable = handleDataAvailable;
       recorder.onstop = handleStop;
@@ -76,7 +74,6 @@ export default function RecordButton() {
       recordedVideo.play();
     }
   
-    stream.getTracks().forEach((track) => track.stop());
     audio.getTracks().forEach((track) => track.stop());
   
     console.log('Recording stopped');
