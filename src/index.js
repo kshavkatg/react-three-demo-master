@@ -231,7 +231,7 @@ function Container() {
 
                 // Start video
                 startVideoButton.style.display = 'inherit'
-                startVideoButton.addEventListener('click', () => {video.play()})
+                startVideoButton.addEventListener('click', handleStartVideo)
             }
 
             // Replace
