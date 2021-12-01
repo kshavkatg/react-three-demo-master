@@ -215,10 +215,10 @@ function Container() {
                 })
                 // Place silhouette
                 if (!silhouetteMesh.visible) {
-                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
+                    silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 1)
                     silhouetteMesh.visible = true
 
-                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 0.1)
+                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 1.1)
                     matchMesh.visible = true
                 }
                 silhouetteMesh.lookAt(camera.position)
