@@ -52,7 +52,7 @@ function Container() {
             container.appendChild( renderer.domElement );
 
             // Ground planeMesh
-            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(100, 100, 1, 1), new THREE.MeshStandardMaterial({
+            const planeMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(1000, 1000, 1, 1), new THREE.MeshStandardMaterial({
                 side: THREE.DoubleSide,
                 transparent: true,
                 opacity: 0,
@@ -193,8 +193,8 @@ function Container() {
                         intPoint = int.point
                     }
                 })
-                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z)
-                matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 0.1)
+                silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z-10)
+                matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 10.1)
                 silhouetteMesh.lookAt(camera.position)
             })
 
@@ -218,7 +218,7 @@ function Container() {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 10)
                     silhouetteMesh.visible = true
 
-                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 1.1)
+                    matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 10.1)
                     matchMesh.visible = true
                 }
                 silhouetteMesh.lookAt(camera.position)
