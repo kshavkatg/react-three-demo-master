@@ -106,7 +106,6 @@ class ARButton {
 					currentSession.end();
 					if (!video.paused) {
 						// stop the video
-						videoMesh.visible = false
 						video.pause()
 						video.currentTime = 0
 					}
