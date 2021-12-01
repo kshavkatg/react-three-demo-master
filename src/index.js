@@ -167,6 +167,10 @@ function Container() {
 
             mouse = new THREE.Vector2()
 
+            // Get Buttons 
+            const startVideoButton = document.querySelector('.start_video')
+            const replaceButton = document.querySelector('.replace_button')
+
             const onTouch = ( event ) => {
                 // calculate mouse position in normalized device coordinates
 	            // (-1 to +1) for both components
@@ -195,7 +199,6 @@ function Container() {
                 })
                 silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z-3)
                 matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
-                silhouetteMesh.lookAt(camera.position)
             })
 
             // On user select
@@ -203,7 +206,7 @@ function Container() {
                 // cast ray from touch coordinate
                 raycaster.setFromCamera( mouse, camera )
                 const intersects = raycaster.intersectObjects( scene.children, false );
-                //video.play()
+
                 // get first intersection point
                 let intPoint
                 // only get the int point with ground
@@ -221,10 +224,13 @@ function Container() {
                     matchMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
                     matchMesh.visible = true
                 }
-                silhouetteMesh.lookAt(camera.position)
+
+                // Start video
+                startVideoButton.style.display = 'inherit'
+                startVideoButton.addEventListener('click', () => {video.play()})
             }
 
-            const replaceButton = document.querySelector('.replace_button')
+            // Replace
             const handleReplace = () => {
                 console.log('handle replace touch')
                 silhouetteMesh.visible = false
@@ -255,7 +261,6 @@ function Container() {
 
         // Render function from for frame depending funct
         function render( timestamp, frame ) {
-            silhouetteMesh.lookAt(camera.position)
             renderer.render( scene, camera );
         }
 
@@ -269,6 +274,7 @@ function Container() {
             <div className="scene" />
             <div className="overlay">
                 <ReplaceButton />
+                <img className='start_video' src='./images/start_video_button.png' alt='start' />
             </div>
         </>
     )
