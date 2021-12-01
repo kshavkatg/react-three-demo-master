@@ -18,6 +18,7 @@ class ARButton {
 				svg.style.position = 'absolute';
 				svg.style.left = '20px';
 				svg.style.top = '20px';
+				svg.classList.add('close_svg')
 				svg.addEventListener( 'click', function () {
 
 					currentSession.end();
@@ -99,17 +100,11 @@ class ARButton {
 				if ( currentSession === null ) {
 
 					navigator.xr.requestSession( 'immersive-ar', sessionInit ).then( onSessionStarted );
-					console.log(window.threeScene)
+
 				} else {
-					const video = document.getElementById( 'greenscreenvideo' );
+
 					currentSession.end();
-					if (!video.paused) {
-						// stop the video
-						video.pause()
-						video.currentTime = 0
-					}
-					console.log(window.threeScene)
-										
+
 				}
 
 			};
