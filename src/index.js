@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from           'three';
 import { ARButton } from         './libs/ARButton.js';
+import { createWebGLContext } from         './libs/create-context';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton";
@@ -25,6 +26,7 @@ function Container() {
 
         init();
         animate();
+        initGL();
 
         function init() {
             // get container for the canvas
@@ -306,6 +308,20 @@ function Container() {
         function render( timestamp, frame ) {
             renderer.render( scene, camera );
         }
+
+        function initGL() {
+    
+            let gl = createWebGLContext({
+              xrCompatible: true
+            });
+            document.body.appendChild(gl.canvas);
+    
+            onResize();
+            window.addEventListener('resize', onResize);
+    
+            renderer = new Renderer(gl);
+            scene.setRenderer(renderer);
+          }
 
     }, [])
 
