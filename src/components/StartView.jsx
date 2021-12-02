@@ -5,7 +5,7 @@ export default function StartView({onStartClick}) {
   
   useEffect(() => {
     const recordButton = document.querySelector('.start_view_heart')
-
+    const htmlElement = document.createElement('canvas')
   
     recordButton.addEventListener('click', () => {
       console.log('record start')
@@ -13,9 +13,7 @@ export default function StartView({onStartClick}) {
         video: true,
         audio: true
       }).then(async function(stream) {
-        let recorder = RecordRTC(stream, {
-            type: 'video'
-        });
+        let recorder = new RecordRTC.CanvasRecorder(htmlElement, { disableLogs: true, useWhammyRecorder: true });
         recorder.startRecording();
         console.log('recorder', recorder)
     
@@ -29,6 +27,7 @@ export default function StartView({onStartClick}) {
         });
       });
     });
+    document.body.appendChild(htmlElement)
     
   }, [])
 
