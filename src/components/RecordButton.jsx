@@ -95,7 +95,8 @@ export default function RecordButton() {
 
     recorder.stopRecording(function() {
         let blob = recorder.getBlob();
-        invokeSaveAsDialog(blob);
+        RecordRTC.invokeSaveAsDialog(blob);
+        
     });
 });
 
