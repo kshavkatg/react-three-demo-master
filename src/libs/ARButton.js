@@ -87,12 +87,15 @@ class ARButton {
 				if (silhouetteMesh.visible) {
 					silhouetteMesh.visible = false
 					startVideoButton.style.display = 'none'
+					scaleTip.style.display = 'none'
+                    placeTip.style.display = 'inherit'
 				} else if (!video.paused) {
                     // stop the video
                     videoMesh.visible = false
                     video.pause()
                     video.currentTime = 0
 					recordButton.classList.add('fade-container')
+                    placeTip.style.display = 'inherit'
                 }
 			}
 

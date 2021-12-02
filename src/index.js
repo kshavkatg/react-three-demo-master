@@ -6,6 +6,8 @@ import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton";
 import RecordButton from "./components/RecordButton";
+import PlaceTip from "./components/PlaceTip";
+import ScaleTip from "./components/ScaleTip"
 require('./styles/custom.scss')
 
 function Container() {
@@ -171,6 +173,12 @@ function Container() {
 
             mouse = new THREE.Vector2()
 
+            // Get Tips 
+            const placeTip = document.querySelector('.place_tip')
+            const scaleTip = document.querySelector('.scale_tip')
+            // Show Place Tip
+            placeTip.style.display = 'inherit'
+
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
             const replaceButton = document.querySelector('.replace_button')
@@ -212,12 +220,15 @@ function Container() {
                 if (silhouetteMesh.visible) {
 					silhouetteMesh.visible = false
 					startVideoButton.style.display = 'none'
+                    scaleTip.style.display = 'none'
+                    placeTip.style.display = 'inherit'
 				} else if (!video.paused) {
                     // stop the video
                     videoMesh.visible = false
                     video.pause()
                     video.currentTime = 0
                     recordButton.classList.add('fade-container')
+                    placeTip.style.display = 'inherit'
                 }
             }
 
@@ -227,6 +238,7 @@ function Container() {
                 silhouetteMesh.visible = false
                 video.play()
                 startVideoButton.style.display = 'none'
+                scaleTip.style.display = 'none'
             }
 
             replaceButton.addEventListener('click', handleReplace)
@@ -256,6 +268,8 @@ function Container() {
                     silhouetteMesh.position.set(intPoint.x, intPoint.y, intPoint.z - 3)
                     videoMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
                     silhouetteMesh.visible = true
+                    placeTip.style.display = 'none'
+                    scaleTip.style.display = 'inherit'
                 }
 
                 // Start video
@@ -302,6 +316,8 @@ function Container() {
             <StartView />
             <div className="scene" />
             <div className="overlay">
+                <PlaceTip />
+                <ScaleTip />
                 <ReplaceButton />
                 <RecordButton />
                 <img className='start_video' src='./images/start_video_button.png' alt='start' />
