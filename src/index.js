@@ -177,7 +177,7 @@ function Container() {
             const placeTip = document.querySelector('.place_tip')
             const scaleTip = document.querySelector('.scale_tip')
             // Show Place Tip
-            placeTip.style.display = 'inherit'
+            placeTip.style.display = 'flex'
 
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
@@ -221,14 +221,14 @@ function Container() {
 					silhouetteMesh.visible = false
 					startVideoButton.style.display = 'none'
                     scaleTip.style.display = 'none'
-                    placeTip.style.display = 'inherit'
+                    placeTip.style.display = 'flex'
 				} else if (!video.paused) {
                     // stop the video
                     videoMesh.visible = false
                     video.pause()
                     video.currentTime = 0
                     recordButton.classList.add('fade-container')
-                    placeTip.style.display = 'inherit'
+                    placeTip.style.display = 'flex'
                 }
             }
 
@@ -269,7 +269,7 @@ function Container() {
                     videoMesh.position.set(intPoint.x, intPoint.y + 0.17, intPoint.z - 3.1)
                     silhouetteMesh.visible = true
                     placeTip.style.display = 'none'
-                    scaleTip.style.display = 'inherit'
+                    scaleTip.style.display = 'flex'
                 }
 
                 // Start video
