@@ -2,9 +2,8 @@
 @import "./RecorderButton.scss";
 @import "./Tips.scss";
 
-body,
-#root {
-    background: black;
+body {
+  background: black !important;
 }
 
 .replace_button {
