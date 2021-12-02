@@ -8,6 +8,9 @@ class ARButton {
 			const video = document.getElementById( 'greenscreenvideo' );
 			const startVideoButton = document.querySelector('.start_video')
 			const recordButton = document.querySelector('#recorder')
+			// Get Tips 
+            const placeTip = document.querySelector('.place_tip')
+            const scaleTip = document.querySelector('.scale_tip')
 			let videoMesh, silhouetteMesh;
 
 			if ( sessionInit.domOverlay === undefined ) {
