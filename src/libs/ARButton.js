@@ -3,14 +3,16 @@ class ARButton {
 	static createButton( renderer, sessionInit = {} ) {
 
 		const button = document.createElement( 'button' );
+		const replaceButton = document.querySelector('.replace_button')
+		// Get Tips 
+		const placeTip = document.querySelector('.place_tip')
+		const scaleTip = document.querySelector('.scale_tip')
 
 		function showStartAR( /*device*/ ) {
 			const video = document.getElementById( 'greenscreenvideo' );
 			const startVideoButton = document.querySelector('.start_video')
 			const recordButton = document.querySelector('#recorder')
-			// Get Tips 
-            const placeTip = document.querySelector('.place_tip')
-            const scaleTip = document.querySelector('.scale_tip')
+			
 			let videoMesh, silhouetteMesh;
 
 			if ( sessionInit.domOverlay === undefined ) {
@@ -220,9 +222,12 @@ class ARButton {
 			stylizeElement( message );
 			message.style.backgroundImage = 'none'
 			message.style.width = '100%'
+			message.style.left = '0'
 			message.style.textAlign = 'center'
 			message.style.color = 'white'
 			message.style.fontSize = '20px'
+			placeTip.style.display = 'none'
+			replaceButton.style.display = 'none'
 
 			return message;
 
