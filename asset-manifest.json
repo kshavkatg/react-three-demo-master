@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-three-demo-master/static/css/main.183f3ba8.chunk.css",
-    "main.js": "/react-three-demo-master/static/js/main.0b23b249.chunk.js",
-    "main.js.map": "/react-three-demo-master/static/js/main.0b23b249.chunk.js.map",
+    "main.js": "/react-three-demo-master/static/js/main.05d9e093.chunk.js",
+    "main.js.map": "/react-three-demo-master/static/js/main.05d9e093.chunk.js.map",
     "runtime-main.js": "/react-three-demo-master/static/js/runtime-main.33736ba7.js",
     "runtime-main.js.map": "/react-three-demo-master/static/js/runtime-main.33736ba7.js.map",
     "static/js/2.a832fa3a.chunk.js": "/react-three-demo-master/static/js/2.a832fa3a.chunk.js",
     "static/js/2.a832fa3a.chunk.js.map": "/react-three-demo-master/static/js/2.a832fa3a.chunk.js.map",
     "index.html": "/react-three-demo-master/index.html",
-    "precache-manifest.7dfd408258dd7ac3464101ce9009616e.js": "/react-three-demo-master/precache-manifest.7dfd408258dd7ac3464101ce9009616e.js",
+    "precache-manifest.8fd46d832d5dda2bcb9e01aa64bcca2c.js": "/react-three-demo-master/precache-manifest.8fd46d832d5dda2bcb9e01aa64bcca2c.js",
     "service-worker.js": "/react-three-demo-master/service-worker.js",
     "static/css/main.183f3ba8.chunk.css.map": "/react-three-demo-master/static/css/main.183f3ba8.chunk.css.map",
     "static/js/2.a832fa3a.chunk.js.LICENSE.txt": "/react-three-demo-master/static/js/2.a832fa3a.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.33736ba7.js",
     "static/js/2.a832fa3a.chunk.js",
     "static/css/main.183f3ba8.chunk.css",
-    "static/js/main.0b23b249.chunk.js"
+    "static/js/main.05d9e093.chunk.js"
   ]
 }
