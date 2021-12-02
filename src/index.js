@@ -177,7 +177,7 @@ function Container() {
             const placeTip = document.querySelector('.place_tip')
             const scaleTip = document.querySelector('.scale_tip')
             // Show Place Tip
-            placeTip.style.display = 'flex'
+            if ( 'xr' in navigator ) placeTip.style.display = 'flex'
 
             // Get Buttons 
             const startVideoButton = document.querySelector('.start_video')
