@@ -316,11 +316,10 @@ function Container() {
             });
             document.body.appendChild(gl.canvas);
     
-            onResize();
-            window.addEventListener('resize', onResize);
+            // window.addEventListener('resize', onResize);
     
-            renderer = new Renderer(gl);
-            scene.setRenderer(renderer);
+            // renderer = new Renderer(gl);
+            // scene.setRenderer(renderer);
           }
 
     }, [])
