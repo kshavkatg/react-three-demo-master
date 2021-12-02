@@ -26,7 +26,6 @@ function Container() {
 
         init();
         animate();
-        initGL();
 
         function init() {
             // get container for the canvas
@@ -289,6 +288,11 @@ function Container() {
 
             // add scene to Window
             window.threeScene = scene
+
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl');  
+            document.body.appendChild(canvas)  
+            
         }
 
         // resize handler
@@ -309,18 +313,19 @@ function Container() {
             renderer.render( scene, camera );
         }
 
-        function initGL() {
+        // function initGL() {
     
-            let gl = createWebGLContext({
-              xrCompatible: true
-            });
-            document.body.appendChild(gl.canvas);
+        //     let gl = createWebGLContext({
+        //       xrCompatible: true
+        //     });
+        //     document.body.appendChild(gl.canvas);
     
-            // window.addEventListener('resize', onResize);
+        //     // window.addEventListener('resize', onResize);
     
-            renderer = new Renderer(gl);
-            scene.setRenderer(renderer);
-          }
+        //     renderer = new Renderer(gl);
+        //     scene.setRenderer(renderer);
+          
+        // }
 
     }, [])
 
