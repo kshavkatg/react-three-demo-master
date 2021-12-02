@@ -6,7 +6,7 @@ export default function RecordButton() {
   useEffect(() => {
   //   const video = document.getElementById( 'greenscreenvideo' );
 	// 	const startVideoButton = document.querySelector('.start_video')
-	// 	const recordButton = document.querySelector('#recorder')
+	const recordButton = document.querySelector('#recorder')
   //   let stream, recorder, mixedStream, audio, recordedVideo;
   //   let chunks = [];
 
@@ -79,27 +79,28 @@ export default function RecordButton() {
   
   //   console.log('Recording stopped');
   // }
-  // recordButton.addEventListener('click', startRecording);
 
-  navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: true
-}).then(async function(stream) {
-    let recorder = RecordRTC(stream, {
-        type: 'video'
+  recordButton.addEventListener('click', () => {
+    navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true
+    }).then(async function(stream) {
+      let recorder = RecordRTC(stream, {
+          type: 'video'
+      });
+      recorder.startRecording();
+  
+      const sleep = m => new Promise(r => setTimeout(r, m));
+      await sleep(3000);
+  
+      recorder.stopRecording(function() {
+          let blob = recorder.getBlob();
+          RecordRTC.invokeSaveAsDialog(blob);
+          
+      });
     });
-    recorder.startRecording();
-
-    const sleep = m => new Promise(r => setTimeout(r, m));
-    await sleep(3000);
-
-    recorder.stopRecording(function() {
-        let blob = recorder.getBlob();
-        RecordRTC.invokeSaveAsDialog(blob);
-        
-    });
-});
-
+  });
+  
 }, [])
 
     return (
