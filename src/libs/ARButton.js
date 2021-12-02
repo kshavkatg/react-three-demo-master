@@ -218,7 +218,7 @@ class ARButton {
 			message.style.textDecoration = 'none';
 
 			stylizeElement( message );
-			message.style.display = 'none'
+			message.style.backgroundImage = 'none'
 			message.style.color = 'white'
 			message.style.fontSize = '20px'
 
