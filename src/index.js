@@ -305,6 +305,7 @@ function Container() {
         // Animations
         function animate() {
             renderer.setAnimationLoop( render );
+            requestAnimationFrame(console.log('req frame ______'))
         }
 
         // Render function from for frame depending funct
