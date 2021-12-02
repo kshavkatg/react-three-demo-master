@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from           'three';
 import { ARButton } from         './libs/ARButton.js';
-import { createWebGLContext } from         './libs/create-context';
+import { Renderer, createWebGLContext } from         './libs/create-context';
 import { ControllerGestures } from './libs/ControllerGestures'
 import StartView from "./components/StartView";
 import ReplaceButton from "./components/ReplaceButton";
@@ -318,8 +318,8 @@ function Container() {
     
             // window.addEventListener('resize', onResize);
     
-            // renderer = new Renderer(gl);
-            // scene.setRenderer(renderer);
+            renderer = new Renderer(gl);
+            scene.setRenderer(renderer);
           }
 
     }, [])
