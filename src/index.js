@@ -227,7 +227,7 @@ function Container() {
                     videoMesh.visible = false
                     video.pause()
                     video.currentTime = 0
-                    recordButton.classList.add('fade-container')
+                    // recordButton.classList.add('fade-container')
                     placeTip.style.display = 'flex'
                 }
             }
@@ -244,8 +244,8 @@ function Container() {
             replaceButton.addEventListener('click', handleReplace)
             // show recorder when video is playing
             video.addEventListener('playing', () => {
-                recordButton.classList.remove('fade-container')
-                recordButton.classList.add('active')
+                // recordButton.classList.remove('fade-container')
+                // recordButton.classList.add('active')
             })
 
             // On user select
