@@ -1,3 +1,5 @@
+import React from "react"
+
 export default function ScaleTip() {
     return (
       <div className='scale_tip'>

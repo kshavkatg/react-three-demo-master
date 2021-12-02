@@ -1,3 +1,5 @@
+import React from "react"
+
 export default function PlaceTip() {
     return (
       <div className='place_tip'>
