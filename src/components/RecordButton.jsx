@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import * as RecordRTC from 'recordrtc';
 
 export default function RecordButton() {
 
