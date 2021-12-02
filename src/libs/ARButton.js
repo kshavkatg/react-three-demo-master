@@ -204,12 +204,12 @@ class ARButton {
 			const message = document.createElement( 'a' );
 
 			if ( window.isSecureContext === false ) {
-				button.style.backgroundImage = 'none'
+				button.style.display = 'none'
 				message.href = document.location.href.replace( /^http:/, 'https:' );
 				message.innerHTML = 'WEBXR NEEDS HTTPS'; // TODO Improve message
 
 			} else {
-				button.style.backgroundImage = 'none'
+				button.style.display = 'none'
 				message.href = 'https://immersiveweb.dev/';
 				message.innerHTML = 'WEBXR NOT AVAILABLE';
 
