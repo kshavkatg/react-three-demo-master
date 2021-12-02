@@ -8,6 +8,7 @@ export default function StartView({onStartClick}) {
 
   
     recordButton.addEventListener('click', () => {
+      console.log('record start')
       navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
@@ -16,6 +17,7 @@ export default function StartView({onStartClick}) {
             type: 'video'
         });
         recorder.startRecording();
+        console.log('recorder', recorder)
     
         const sleep = m => new Promise(r => setTimeout(r, m));
         await sleep(3000);
